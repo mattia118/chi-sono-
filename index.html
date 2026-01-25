@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sviluppatore Web | Siti moderni, veloci e convertenti</title>
-  <meta name="description" content="Creo siti web professionali: landing page, portfolio, siti aziendali ed e-commerce. Performance, SEO tecnico, design moderno e assistenza." />
+  <title>Programmatore | Sviluppo Web e Software</title>
+  <meta name="description" content="Portfolio da programmatore: sviluppo web, interfacce moderne, ottimizzazione performance e progetti software. Nessun contatto pubblico." />
   <meta name="theme-color" content="#070a14" />
   <style>
     :root{
       --bg:#060813;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.04);
       --line: rgba(255,255,255,.12);
       --text:#eef2ff;
       --muted:#b8c2ff;
@@ -136,32 +134,8 @@
       margin:0;
       color:var(--muted);
       font-size: clamp(15px, 1.35vw, 18px);
-      max-width: 66ch;
+      max-width: 70ch;
     }
-    .cta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:16px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      text-decoration:none;
-      font-weight:900;
-      font-size:14px;
-      cursor:pointer;
-      transition: transform .15s ease, filter .15s ease, background .15s ease;
-      user-select:none;
-    }
-    .btn:hover{background: rgba(255,255,255,.10); transform: translateY(-1px)}
-    .btn.primary{
-      border-color: rgba(110,231,255,.32);
-      background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(155,140,255,.20));
-      box-shadow: 0 18px 60px rgba(110,231,255,.14);
-    }
-    .btn.primary:hover{filter:brightness(1.08)}
     .badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
     .badge{
       padding:8px 10px;
@@ -173,9 +147,7 @@
       font-weight:850;
     }
 
-    .sideBox{
-      display:grid; gap:12px;
-    }
+    .sideBox{display:grid; gap:12px}
     .mini{
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
@@ -297,39 +269,11 @@
       text-decoration:none;
     }
     .plink:hover{background: rgba(255,255,255,.08)}
-
-    /* Pricing */
-    .pricing{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:14px;
+    .plink[aria-disabled="true"]{
+      opacity:.55;
+      cursor:not-allowed;
+      pointer-events:none;
     }
-    @media (max-width: 980px){ .pricing{grid-template-columns:1fr} }
-    .price{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.045);
-      border-radius: 18px;
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .price.featured{
-      border-color: rgba(110,231,255,.30);
-      box-shadow: 0 22px 80px rgba(110,231,255,.10);
-      background: linear-gradient(180deg, rgba(110,231,255,.10), rgba(255,255,255,.04));
-    }
-    .price h3{margin:0}
-    .price .pdesc{margin:6px 0 0; color:var(--muted)}
-    .money{
-      margin-top:14px;
-      font-size:28px;
-      font-weight:1000;
-      letter-spacing:-.02em;
-    }
-    .money small{font-size:13px; color:var(--muted); font-weight:900}
-    ul{margin:12px 0 0; padding-left:18px; color:var(--muted)}
-    li{margin:7px 0}
 
     /* FAQ */
     details{
@@ -346,37 +290,6 @@
     }
     details p{margin:10px 0 0; color:var(--muted)}
 
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:14px;
-      margin-top:14px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){ .contact{grid-template-columns:1fr} }
-    label small{color:var(--muted); font-weight:900}
-    input, textarea{
-      width:100%;
-      margin-top:6px;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      color: var(--text);
-      outline:none;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(110,231,255,.35);
-      box-shadow: 0 0 0 6px rgba(110,231,255,.10);
-    }
-    .note{
-      color:var(--muted);
-      font-size:13px;
-      border-top:1px dashed rgba(255,255,255,.16);
-      padding-top:12px;
-      margin-top:12px;
-    }
     footer{
       margin-top:22px;
       padding:22px 0 40px;
@@ -385,14 +298,13 @@
       border-top:1px solid rgba(255,255,255,.10);
     }
 
-    /* Subtle animation */
+    /* Subtle animation blob */
     .floaty{
       position:fixed;
       inset:auto auto -220px -220px;
       width:520px; height:520px;
       background: radial-gradient(circle at 35% 35%, rgba(110,231,255,.24), transparent 60%),
                   radial-gradient(circle at 70% 70%, rgba(155,140,255,.18), transparent 60%);
-      filter: blur(2px);
       opacity:.75;
       pointer-events:none;
       transform: rotate(12deg);
@@ -402,6 +314,20 @@
     @keyframes drift{
       from{transform: translate(0,0) rotate(10deg)}
       to{transform: translate(60px, -40px) rotate(18deg)}
+    }
+    .privacyNote{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:13px;
+      border:1px dashed rgba(255,255,255,.16);
+      background: rgba(255,255,255,.03);
+      padding:12px;
+      border-radius:16px;
+    }
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,.92);
     }
   </style>
 </head>
@@ -415,17 +341,17 @@
       <a class="brand" href="#top" aria-label="Vai in alto">
         <span class="mark" aria-hidden="true"></span>
         <span>
-          <span class="t1">SVILUPPATORE WEB</span>
-          <span class="t2">Siti che caricano veloci • design premium • SEO tecnico</span>
+          <span class="t1">PORTFOLIO PROGRAMMATORE</span>
+          <span class="t2">Web • UI • Performance • Progetti</span>
         </span>
       </a>
       <nav class="links" aria-label="Menu">
-        <a href="#servizi">Servizi</a>
+        <a href="#profilo">Profilo</a>
+        <a href="#cosa-so-fare">Cosa so fare</a>
         <a href="#stack">Stack</a>
         <a href="#portfolio">Portfolio</a>
-        <a href="#prezzi">Pacchetti</a>
+        <a href="#processo">Processo</a>
         <a href="#faq">FAQ</a>
-        <a href="#contatti">Contatti</a>
       </nav>
     </div>
   </header>
@@ -433,105 +359,98 @@
   <main id="top" class="wrap hero">
     <div class="heroGrid">
       <!-- HERO MAIN -->
-      <section class="card">
+      <section class="card" id="profilo">
         <div class="pad">
-          <div class="kicker"><span class="spark"></span> siti web professionali per aziende, professionisti e progetti</div>
-          <h1>Ti serve un sito che <span style="background:linear-gradient(90deg,var(--aqua),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent;">porta contatti</span> e non solo “bello da vedere”.</h1>
+          <div class="kicker"><span class="spark"></span> profilo tecnico (senza dati personali)</div>
+          <h1>Programmazione e sviluppo web con stile <span style="background:linear-gradient(90deg,var(--aqua),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent;">premium</span>.</h1>
           <p class="sub">
-            Realizzo siti moderni con <b>design premium</b>, <b>performance</b>, <b>SEO tecnico</b> e <b>zero fronzoli inutili</b>.
-            Il risultato: un sito veloce, chiaro e pronto a convertire.
+            Questo sito è una vetrina tecnica: mostra <b>competenze</b>, <b>approccio</b> e <b>progetti</b>.
+            Nessun riferimento personale, nessun contatto pubblico: solo <b>risultati</b> e <b>metodo</b>.
           </p>
-
-          <div class="cta">
-            <a class="btn primary" href="#contatti">✨ Richiedi preventivo</a>
-            <a class="btn" href="#portfolio">📁 Vedi esempi</a>
-            <button class="btn" onclick="scrollToId('prezzi')">💎 Pacchetti</button>
-          </div>
 
           <div class="badges" aria-label="Punti di forza">
-            <span class="badge">⚡ Performance & Core Web Vitals</span>
-            <span class="badge">🔍 SEO tecnico (base solida)</span>
+            <span class="badge">⚡ Siti veloci</span>
             <span class="badge">📱 Mobile-first</span>
-            <span class="badge">🧩 Codice pulito & manutenzione</span>
+            <span class="badge">🧠 Codice pulito</span>
+            <span class="badge">🧩 UI moderna</span>
           </div>
 
-          <p class="note">
-            <b>Metodo:</b> analisi → struttura → design → sviluppo → test → pubblicazione → supporto.
-            Niente confusione: ogni fase è controllata.
-          </p>
+          <div class="privacyNote">
+            <b>Nota privacy:</b> in questa versione il sito è volutamente “vetrina” e non espone contatti o dati personali.
+          </div>
         </div>
       </section>
 
       <!-- HERO SIDE -->
       <aside class="sideBox">
         <div class="mini">
-          <b>Tempi chiari</b>
-          <span>Consegna rapida su siti piccoli/medi</span>
-          <div class="meter"><i></i></div>
+          <b>Focus: qualità</b>
+          <span>Interfacce curate e leggibili</span>
+          <div class="meter"><i style="width:82%"></i></div>
         </div>
         <div class="mini">
-          <b>Ottimizzazione reale</b>
-          <span>Immagini, caching, accessibilità, SEO</span>
-          <div class="meter" style="margin-top:10px"><i style="width:86%"></i></div>
+          <b>Focus: performance</b>
+          <span>Ottimizzazione reale</span>
+          <div class="meter"><i style="width:88%"></i></div>
         </div>
         <div class="mini">
-          <b>Assistenza</b>
-          <span>Piccole modifiche e aggiornamenti</span>
-          <div class="meter" style="margin-top:10px"><i style="width:72%"></i></div>
+          <b>Focus: ordine</b>
+          <span>Strutture chiare e manutenibili</span>
+          <div class="meter"><i style="width:76%"></i></div>
         </div>
       </aside>
     </div>
 
-    <!-- SERVIZI -->
-    <section id="servizi">
+    <!-- COSA SO FARE -->
+    <section id="cosa-so-fare">
       <div class="headRow">
         <div>
-          <h2>Servizi</h2>
-          <p class="lead">Cosa posso sviluppare per te (in modo concreto).</p>
+          <h2>Cosa so fare</h2>
+          <p class="lead">Competenze pratiche: ciò che sviluppo e consegno (come qualità tecnica).</p>
         </div>
       </div>
 
       <div class="grid">
         <div class="tile">
-          <h3>Landing Page che converte</h3>
-          <p>Una pagina veloce e persuasiva per campagne, servizi, eventi, prenotazioni.</p>
+          <h3>UI moderne e responsive</h3>
+          <p>Layout puliti, leggibili e coerenti su smartphone, tablet e desktop.</p>
           <div class="chips">
-            <span class="chip">CTA</span><span class="chip">Analytics</span><span class="chip">SEO base</span>
+            <span class="chip">Responsive</span><span class="chip">UX</span><span class="chip">Accessibilità</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Sito aziendale / professionale</h3>
-          <p>Struttura chiara: servizi, portfolio, recensioni, contatti, privacy e cookie.</p>
+          <h3>Performance</h3>
+          <p>Caricamento rapido con risorse ottimizzate e struttura leggera.</p>
           <div class="chips">
-            <span class="chip">Mobile-first</span><span class="chip">Velocità</span><span class="chip">Brand</span>
+            <span class="chip">Ottimizzazione</span><span class="chip">Lazy-load</span><span class="chip">Best practice</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Portfolio & personal branding</h3>
-          <p>Presentazione di progetti con schede pulite, filtri e call-to-action.</p>
+          <h3>Componenti e funzioni</h3>
+          <p>Sezioni modulari, componenti riutilizzabili e logica front-end.</p>
           <div class="chips">
-            <span class="chip">Case study</span><span class="chip">UI premium</span><span class="chip">GitHub</span>
+            <span class="chip">Componenti</span><span class="chip">JS</span><span class="chip">Manutenzione</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Restyling sito esistente</h3>
-          <p>Nuova grafica, pulizia contenuti, miglioramento UX, performance e SEO tecnico.</p>
+          <h3>SEO tecnico (base)</h3>
+          <p>Struttura corretta, meta, heading, performance e semantica.</p>
           <div class="chips">
-            <span class="chip">UX</span><span class="chip">Refactor</span><span class="chip">Audit</span>
+            <span class="chip">Meta</span><span class="chip">Semantica</span><span class="chip">Struttura</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Funzioni su misura</h3>
-          <p>Form contatti avanzati, integrazioni, area download, calendari, mappe, componenti.</p>
+          <h3>Progetti “puliti”</h3>
+          <p>Codice ordinato, commenti dove servono, naming sensato.</p>
           <div class="chips">
-            <span class="chip">API</span><span class="chip">Automazioni</span><span class="chip">Componenti</span>
+            <span class="chip">Clean code</span><span class="chip">Refactor</span><span class="chip">Documentazione</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Manutenzione & supporto</h3>
-          <p>Piccole modifiche, aggiornamenti, backup e miglioramenti continui.</p>
+          <h3>Restyling e miglioramenti</h3>
+          <p>Riorganizzazione, modernizzazione grafica, ottimizzazioni mirate.</p>
           <div class="chips">
-            <span class="chip">Fix</span><span class="chip">Update</span><span class="chip">Sicurezza</span>
+            <span class="chip">Restyling</span><span class="chip">UI</span><span class="chip">Performance</span>
           </div>
         </div>
       </div>
@@ -541,48 +460,46 @@
     <section id="stack">
       <div class="headRow">
         <div>
-          <h2>Stack & competenze</h2>
-          <p class="lead">Tecnologie e approccio: scegli uno sviluppatore che ragiona su qualità e risultati.</p>
+          <h2>Stack</h2>
+          <p class="lead">Tecnologie dichiarate in modo semplice e credibile (modifica con le tue reali competenze).</p>
         </div>
       </div>
 
       <div class="grid">
         <div class="tile">
           <h3>Front-end</h3>
-          <p>Interfacce moderne, responsive, accessibili e leggere.</p>
+          <p>Interfacce e comportamento lato client.</p>
           <div class="chips">
             <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-            <span class="chip">UI/UX</span><span class="chip">Accessibility</span>
           </div>
         </div>
         <div class="tile">
-          <h3>Performance</h3>
-          <p>Ottimizzazione immagini, caricamento intelligente, struttura pulita e misurabile.</p>
+          <h3>Strumenti</h3>
+          <p>Organizzazione, debug e qualità del lavoro.</p>
           <div class="chips">
-            <span class="chip">Core Web Vitals</span><span class="chip">Lazy-load</span><span class="chip">Caching</span>
+            <span class="chip">Debug</span><span class="chip">Testing base</span><span class="chip">Versioning</span>
           </div>
         </div>
         <div class="tile">
-          <h3>SEO tecnico</h3>
-          <p>Meta, struttura heading, sitemap, robots, dati strutturati (se servono).</p>
+          <h3>Qualità</h3>
+          <p>Attenzione a struttura, accessibilità e performance.</p>
           <div class="chips">
-            <span class="chip">Meta</span><span class="chip">Schema</span><span class="chip">Sitemap</span>
+            <span class="chip">A11y</span><span class="chip">Performance</span><span class="chip">SEO tecnico</span>
           </div>
         </div>
       </div>
 
-      <p class="note">
-        <b>Importante:</b> posso lavorare “statico e super veloce” (GitHub Pages) oppure collegare un dominio e un hosting.
-        Qui hai già la base perfetta per partire.
-      </p>
+      <div class="privacyNote">
+        <b>Consiglio:</b> qui inserisci SOLO ciò che sai davvero usare. Meglio 6 skill vere che 20 inventate.
+      </div>
     </section>
 
     <!-- PORTFOLIO -->
     <section id="portfolio">
       <div class="headRow">
         <div>
-          <h2>Portfolio (esempi)</h2>
-          <p class="lead">Sostituisci questi esempi con i tuoi lavori reali (link, screenshot, repository).</p>
+          <h2>Portfolio</h2>
+          <p class="lead">Esempi vetrina: puoi sostituire titolo/descrizione con i tuoi lavori reali (anche senza link pubblico).</p>
         </div>
       </div>
 
@@ -591,14 +508,14 @@
           <div class="projTop">
             <div class="ico">🌐</div>
             <div>
-              <h3>Sito professionale “One Page”</h3>
-              <div class="meta">Design premium • form contatto • mobile-first</div>
+              <h3>Sito vetrina moderno</h3>
+              <div class="meta">UI premium • responsive • layout pulito</div>
             </div>
           </div>
-          <p>Pagina di presentazione servizi con sezione offerte e contatto rapido.</p>
+          <p>Struttura chiara, sezioni organizzate, attenzione a leggibilità e gerarchia visiva.</p>
           <div class="projBottom">
-            <a class="plink" href="#" onclick="noLink();return false;">Demo</a>
-            <a class="plink" href="#" onclick="noLink();return false;">Codice</a>
+            <a class="plink" aria-disabled="true">Demo (non pubblica)</a>
+            <a class="plink" aria-disabled="true">Codice (non pubblico)</a>
           </div>
         </article>
 
@@ -606,87 +523,62 @@
           <div class="projTop">
             <div class="ico">🧩</div>
             <div>
-              <h3>Web App / Dashboard</h3>
-              <div class="meta">Componenti • filtri • dati dinamici</div>
+              <h3>Interfaccia a componenti</h3>
+              <div class="meta">Componenti • riuso • manutenzione</div>
             </div>
           </div>
-          <p>Interfaccia con sezioni, schede, filtri e layout responsive.</p>
+          <p>Sezioni modulari riutilizzabili con stile coerente e codice ordinato.</p>
           <div class="projBottom">
-            <a class="plink" href="#" onclick="noLink();return false;">Demo</a>
-            <a class="plink" href="#" onclick="noLink();return false;">Repo</a>
+            <a class="plink" aria-disabled="true">Screenshot (interni)</a>
+            <a class="plink" aria-disabled="true">Note tecniche</a>
           </div>
         </article>
 
         <article class="proj">
           <div class="projTop">
-            <div class="ico">🛒</div>
+            <div class="ico">⚡</div>
             <div>
-              <h3>Mini sito vetrina “Prodotti/Servizi”</h3>
-              <div class="meta">SEO base • struttura • velocità</div>
+              <h3>Ottimizzazione performance</h3>
+              <div class="meta">Peso ridotto • caricamento rapido</div>
             </div>
           </div>
-          <p>Sezioni prodotto, vantaggi, FAQ e call-to-action.</p>
+          <p>Ottimizzazione risorse e struttura per migliorare velocità e user experience.</p>
           <div class="projBottom">
-            <a class="plink" href="#" onclick="noLink();return false;">Apri</a>
-            <a class="plink" href="#" onclick="noLink();return false;">Case study</a>
+            <a class="plink" aria-disabled="true">Prima/Dopo</a>
+            <a class="plink" aria-disabled="true">Checklist</a>
           </div>
         </article>
       </div>
+
+      <div class="privacyNote">
+        <b>Vuoi renderlo più credibile senza link?</b> Aggiungi 1–2 righe “Problema → Soluzione → Risultato” per ogni progetto.
+      </div>
     </section>
 
-    <!-- PREZZI -->
-    <section id="prezzi">
+    <!-- PROCESSO -->
+    <section id="processo">
       <div class="headRow">
         <div>
-          <h2>Pacchetti</h2>
-          <p class="lead">Prezzi indicativi: puoi lasciare la sezione così o personalizzarla. (Nessun nome.)</p>
+          <h2>Processo di lavoro</h2>
+          <p class="lead">Un modo “da professionista” per spiegare come ragioni (anche senza contatti).</p>
         </div>
       </div>
 
-      <div class="pricing">
-        <div class="price">
-          <h3>Start</h3>
-          <p class="pdesc">Per partire in modo pulito e veloce.</p>
-          <div class="money">da 300€ <small>una tantum</small></div>
-          <ul>
-            <li>Landing page professionale</li>
-            <li>Design moderno + responsive</li>
-            <li>SEO base (meta + struttura)</li>
-            <li>Form contatto (mailto)</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn" href="#contatti">Chiedi dettagli</a>
-          </div>
+      <div class="grid">
+        <div class="tile">
+          <h3>1) Analisi</h3>
+          <p>Obiettivo, pubblico, contenuti, vincoli e struttura informativa.</p>
+          <div class="chips"><span class="chip">Brief</span><span class="chip">Struttura</span></div>
         </div>
-
-        <div class="price featured">
-          <h3>Pro</h3>
-          <p class="pdesc">Il pacchetto più richiesto.</p>
-          <div class="money">da 650€ <small>una tantum</small></div>
-          <ul>
-            <li>Sito 4–6 sezioni (servizi, portfolio, ecc.)</li>
-            <li>Ottimizzazione performance</li>
-            <li>SEO tecnico base + sitemap</li>
-            <li>Test mobile e desktop</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn primary" href="#contatti">Richiedi preventivo</a>
-          </div>
+        <div class="tile">
+          <h3>2) Design</h3>
+          <p>Gerarchia visiva, leggibilità, layout coerente, mobile-first.</p>
+          <div class="chips"><span class="chip">UI</span><span class="chip">UX</span></div>
         </div>
-
-        <div class="price">
-          <h3>Custom</h3>
-          <p class="pdesc">Funzioni su misura e integrazioni.</p>
-          <div class="money">su richiesta <small>in base al lavoro</small></div>
-          <ul>
-            <li>Form avanzati / integrazioni</li>
-            <li>Componenti dedicati</li>
-            <li>Restyling + migrazione contenuti</li>
-            <li>Supporto e manutenzione</li>
-          </ul>
-          <div class="cta" style="margin-top:14px">
-            <a class="btn" href="#contatti">Spiegami cosa ti serve</a>
-          </div>
+        <div class="tile">
+          <h3>3) Sviluppo</h3>
+          <p>Codice pulito, componenti, performance e test di base.</p>
+          <div class="chips"><span class="chip">Clean</span><span class="chip">Test</span></div>
         </div>
       </div>
     </section>
@@ -696,128 +588,33 @@
       <div class="headRow">
         <div>
           <h2>FAQ</h2>
-          <p class="lead">Risposte rapide alle domande più comuni.</p>
+          <p class="lead">Domande comuni, senza inviti al contatto.</p>
         </div>
       </div>
 
       <div style="margin-top:14px; display:grid; gap:10px">
         <details>
-          <summary>Quanto tempo serve per pubblicare un sito?</summary>
-          <p>Dipende da contenuti e complessità. Per una landing semplice spesso bastano pochi giorni, per un sito completo serve più tempo.</p>
+          <summary>Perché un sito “pulito” è meglio di uno pieno di effetti?</summary>
+          <p>Perché leggibilità, velocità e struttura contano più degli effetti: migliorano esperienza utente e qualità percepita.</p>
         </details>
         <details>
-          <summary>Posso pubblicare gratis su GitHub Pages?</summary>
-          <p>Sì: per siti statici è un’ottima soluzione (veloce, stabile, perfetta per portfolio e siti vetrina).</p>
+          <summary>Come dimostri qualità anche senza link pubblici?</summary>
+          <p>Con descrizioni chiare: problema, soluzione tecnica adottata e risultato (performance, struttura, usabilità).</p>
         </details>
         <details>
-          <summary>Il sito sarà visibile bene su smartphone?</summary>
-          <p>Sì: progetto in modalità mobile-first e testo leggibile, pulsanti comodi, layout pulito.</p>
+          <summary>Questo sito può restare anonimo?</summary>
+          <p>Sì: è progettato per non contenere dati personali e non offrire contatto pubblico.</p>
         </details>
-        <details>
-          <summary>Ti occupi anche di SEO?</summary>
-          <p>Faccio SEO tecnico (struttura, meta, performance). Per SEO “editoriale” servono anche contenuti e strategia.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- CONTATTI -->
-    <section id="contatti" class="card">
-      <div class="pad">
-        <div class="headRow">
-          <div>
-            <h2>Contatti</h2>
-            <p class="lead">Compila e invia: si apre la tua email con il messaggio già pronto. (Aggiorna la mail sotto.)</p>
-          </div>
-        </div>
-
-        <div class="contact">
-          <div class="tile" style="margin-top:0">
-            <h3>Messaggio rapido</h3>
-            <form onsubmit="sendEmail(event)" style="margin-top:10px; display:grid; gap:10px">
-              <label>
-                <small>Nome (opzionale)</small><br>
-                <input id="c_name" placeholder="Es. Mario" />
-              </label>
-              <label>
-                <small>Email (per risposta)</small><br>
-                <input id="c_email" type="email" required placeholder="Es. mario@email.it" />
-              </label>
-              <label>
-                <small>Cosa ti serve?</small><br>
-                <textarea id="c_msg" required rows="5" placeholder="Es. sito vetrina per attività, 5 pagine, colori aziendali, dominio già acquistato…"></textarea>
-              </label>
-
-              <div class="cta" style="margin-top:2px">
-                <button class="btn primary" type="submit">📩 Invia richiesta</button>
-                <button class="btn" type="button" onclick="copyEmail()">📋 Copia email</button>
-              </div>
-
-              <p class="note">
-                <b>Da personalizzare:</b> sostituisci <code>DEST_EMAIL</code> nello script con la tua email reale.
-                Se vuoi anche WhatsApp/Telegram, lo aggiungo.
-              </p>
-            </form>
-          </div>
-
-          <div class="tile" style="margin-top:0">
-            <h3>Recapiti (senza nome)</h3>
-            <p style="margin:6px 0 0; color:var(--muted)">
-              Inserisci qui i contatti pubblici che vuoi mostrare. Nessun dato personale obbligatorio.
-            </p>
-
-            <div class="chips" style="margin-top:12px">
-              <span class="chip">📧 Email: <a href="mailto:TUAEMAIL@esempio.it">TUAEMAIL@esempio.it</a></span>
-              <span class="chip">🌐 GitHub: <a href="#" onclick="noLink();return false;">link</a></span>
-              <span class="chip">💼 Portfolio: <a href="#" onclick="noLink();return false;">link</a></span>
-            </div>
-
-            <div class="note" style="margin-top:14px">
-              <b>Consiglio:</b> se vuoi restare anonimo, puoi usare una email dedicata solo per lavoro.
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <footer>
-      © <span id="year"></span> • Sviluppo Web • GitHub Pages • <a href="#top">Torna su</a>
+      © <span id="year"></span> • Portfolio tecnico (senza dati personali) • <a href="#top">Torna su</a>
     </footer>
   </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // ✅ Cambia QUI con la tua email reale (nessun nome richiesto)
-    const DEST_EMAIL = "TUAEMAIL@esempio.it";
-
-    function scrollToId(id){
-      document.getElementById(id).scrollIntoView({behavior:"smooth"});
-    }
-    function noLink(){
-      alert("Sostituisci questo con un link reale (demo / repo / screenshot).");
-    }
-    function copyEmail(){
-      navigator.clipboard.writeText(DEST_EMAIL).then(()=>alert("Email copiata ✅"))
-      .catch(()=>alert("Copia manualmente l’email."));
-    }
-
-    function sendEmail(e){
-      e.preventDefault();
-      const name = document.getElementById("c_name").value.trim();
-      const email = document.getElementById("c_email").value.trim();
-      const msg = document.getElementById("c_msg").value.trim();
-
-      const subject = encodeURIComponent("Richiesta sito web (dal portfolio)");
-      const body = encodeURIComponent(
-        "Contatto:\n" +
-        (name ? ("Nome: " + name + "\n") : "") +
-        "Email: " + email + "\n\n" +
-        "Richiesta:\n" + msg + "\n\n" +
-        "—\nInviato dal portfolio su GitHub Pages"
-      );
-
-      window.location.href = `mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`;
-    }
   </script>
 </body>
 </html>
