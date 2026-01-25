@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ing. Gianfranco Spensieri | Ingegnere • RUP • Progettazione • Direzione Lavori</title>
+  <meta name="description" content="Sito professionale: progettazione, direzione lavori, sicurezza, RUP, consulenze tecniche e monitoraggio ambientale. Contatti e portfolio." />
+  <meta name="theme-color" content="#0b1220" />
+  <style>
+    :root{
+      --bg:#070b14;
+      --panel:#0b1220;
+      --panel2:#0f1b35;
+      --text:#eaf0ff;
+      --muted:#b7c3e6;
+      --line:rgba(255,255,255,.10);
+      --brand:#6ee7ff;
+      --brand2:#9b8cff;
+      --good:#7CFFB2;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius:18px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(110,231,255,.15), transparent 55%),
+        radial-gradient(900px 500px at 90% 20%, rgba(155,140,255,.15), transparent 55%),
+        radial-gradient(800px 450px at 50% 100%, rgba(124,255,178,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), #050814 60%, #040615);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 30px rgba(110,231,255,.18);
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:10px;
+      background: rgba(7,11,20,.55);
+      border:1px solid rgba(255,255,255,.16);
+    }
+    .navlinks{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .navlinks a{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+    }
+    .navlinks a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .hero{padding:34px 0 12px}
+    .gridHero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .gridHero{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(15,27,53,.85), rgba(11,18,32,.85));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .pad{padding:20px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.25));
+      box-shadow: 0 0 0 6px rgba(110,231,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    h1{
+      margin:12px 0 8px;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height:1.1;
+      letter-spacing:-.02em;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size: clamp(15px, 1.35vw, 18px);
+      margin:0 0 16px;
+      max-width: 62ch;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+      font-weight:800;
+      font-size:14px;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      border-color: rgba(110,231,255,.28);
+      background: linear-gradient(135deg, rgba(110,231,255,.16), rgba(155,140,255,.14));
+    }
+    .btn.primary:hover{filter:brightness(1.08)}
+    .pillRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-weight:650;
+    }
+
+    .statGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .stat{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .stat b{display:block; font-size:20px}
+    .stat span{color:var(--muted); font-weight:650; font-size:13px}
+    .note{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px dashed rgba(255,255,255,.14);
+      padding-top:12px;
+    }
+
+    section{padding:18px 0}
+    .h2row{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    h2{
+      margin:0;
+      font-size: clamp(20px, 2.3vw, 28px);
+      letter-spacing:-.01em;
+    }
+    .h2row p{margin:0; color:var(--muted); max-width:70ch}
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    @media (max-width: 920px){ .grid2{grid-template-columns:1fr} }
+
+    .item{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius: 18px;
+      padding:16px;
+    }
+    .item h3{margin:0 0 6px; font-size:16px}
+    .item p{margin:0; color:var(--muted)}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .tag{
+      font-size:12px; font-weight:800;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      opacity:.92;
+    }
+
+    .projects{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .projects{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .projects{grid-template-columns:1fr} }
+
+    .proj{
+      position:relative;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius: 18px;
+      overflow:hidden;
+      min-height: 178px;
+    }
+    .proj .top{
+      padding:16px;
+      display:flex; gap:10px; align-items:center;
+    }
+    .icon{
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(155,140,255,.18));
+      border:1px solid rgba(255,255,255,.12);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .proj h3{margin:0; font-size:15px}
+    .proj p{margin:8px 16px 0; color:var(--muted); font-size:14px}
+    .proj .bottom{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:14px 16px 16px;
+      margin-top:8px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .plink{
+      text-decoration:none;
+      font-weight:800;
+      font-size:13px;
+      color: var(--text);
+      padding:9px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .plink:hover{background: rgba(255,255,255,.08)}
+
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){ .contact{grid-template-columns:1fr} }
+    .list{
+      display:grid; gap:10px;
+      margin-top:10px;
+    }
+    .row{
+      display:flex; align-items:flex-start; gap:10px;
+      padding:12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .row b{display:block}
+    .row small{color:var(--muted); font-weight:650}
+    .footer{
+      padding:24px 0 40px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .sep{height:1px; background: rgba(255,255,255,.10); margin:10px 0 0}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-weight:800;
+      font-size:12px;
+      color: var(--text);
+    }
+    .ok{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--good);
+      box-shadow: 0 0 0 6px rgba(124,255,178,.10);
+      border:1px solid rgba(255,255,255,.18);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Vai in alto">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Ing. Gianfranco Spensieri</span>
+      </a>
+      <nav class="navlinks" aria-label="Menu">
+        <a href="#servizi">Servizi</a>
+        <a href="#competenze">Competenze</a>
+        <a href="#progetti">Portfolio</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="wrap hero">
+    <div class="gridHero">
+      <section class="card">
+        <div class="pad">
+          <div class="kicker"><span class="dot"></span> Profilo professionale</div>
+          <h1>Ingegneria, gestione lavori pubblici e consulenza tecnica.</h1>
+          <p class="subtitle">
+            Svolgo attività di <b>progettazione</b>, <b>direzione lavori</b> e supporto tecnico-amministrativo.
+            Mi occupo anche di <b>monitoraggio ambientale</b> e <b>meteorologia applicata</b> quando il progetto lo richiede.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="#contatti">📩 Richiedi un contatto</a>
+            <a class="btn" href="#progetti">📁 Vedi il portfolio</a>
+            <a class="btn" href="#" onclick="downloadCV(); return false;">⬇️ Scarica CV (PDF)</a>
+          </div>
+
+          <div class="pillRow" aria-label="Punti di forza">
+            <span class="pill">RUP / Tecnico Ente</span>
+            <span class="pill">Direzione Lavori</span>
+            <span class="pill">Capitolati & Contabilità</span>
+            <span class="pill">Sicurezza cantieri</span>
+            <span class="pill">Monitoraggi & Sensori</span>
+          </div>
+
+          <p class="note">
+            <span class="badge"><span class="ok"></span> Approccio</span>
+            Chiarezza, metodo, documenti ben impostati e attenzione alla tracciabilità: il lavoro deve reggere sia sul campo che “su carta”.
+          </p>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="pad">
+          <div class="kicker"><span class="dot"></span> In sintesi</div>
+          <div class="statGrid" style="margin-top:12px">
+            <div class="stat">
+              <b>Opere & cantieri</b>
+              <span>gestione tecnica e controllo</span>
+            </div>
+            <div class="stat">
+              <b>Atti & procedure</b>
+              <span>supporto tecnico-amministrativo</span>
+            </div>
+            <div class="stat">
+              <b>Consulenze</b>
+              <span>relazioni e pareri tecnici</span>
+            </div>
+            <div class="stat">
+              <b>Ambiente</b>
+              <span>monitoraggio e dati</span>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:14px">
+            <b>Disponibilità</b><br/>
+            Collaborazioni con enti, imprese e privati. Interventi su progetto/commessa o a supporto continuativo.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- SERVIZI -->
+    <section id="servizi" style="margin-top:18px">
+      <div class="h2row">
+        <div>
+          <h2>Servizi</h2>
+          <p>Quello che posso fare per te (in modo chiaro e verificabile).</p>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:14px">
+        <div class="item">
+          <h3>Direzione Lavori e controllo di cantiere</h3>
+          <p>Verifiche, stati di avanzamento, contabilità, ordini di servizio, gestione criticità e conformità esecutiva.</p>
+          <div class="tags">
+            <span class="tag">SAL</span><span class="tag">Verbali</span><span class="tag">Contabilità</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3>Progettazione e supporto tecnico</h3>
+          <p>Impostazione soluzioni, stime, relazioni tecniche, computi e predisposizione documenti di gara.</p>
+          <div class="tags">
+            <span class="tag">Computi</span><span class="tag">Capitolati</span><span class="tag">Relazioni</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3>Procedure, atti e assistenza RUP</h3>
+          <p>Supporto alla corretta impostazione documentale e alla tracciabilità (determine, verifiche, allegati, controlli).</p>
+          <div class="tags">
+            <span class="tag">Tracciabilità</span><span class="tag">Istruttorie</span><span class="tag">Atti</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3>Consulenze tecniche e relazioni</h3>
+          <p>Pareri tecnici, relazioni specialistiche, analisi eventi e supporto in contenziosi tecnici (quando necessario).</p>
+          <div class="tags">
+            <span class="tag">Perizie</span><span class="tag">Relazioni</span><span class="tag">Analisi</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3>Monitoraggio ambientale e meteo applicata</h3>
+          <p>Progetti con sensori, stazioni meteo, webcam, monitoraggi climatici e gestione/lettura dei dati.</p>
+          <div class="tags">
+            <span class="tag">Sensori</span><span class="tag">Dati</span><span class="tag">Webcam</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3>Formazione e divulgazione tecnica</h3>
+          <p>Incontri, laboratori e presentazioni tecniche per scuole, enti e comunità (anche su meteorologia e ambiente).</p>
+          <div class="tags">
+            <span class="tag">Scuole</span><span class="tag">Enti</span><span class="tag">Workshop</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENZE -->
+    <section id="competenze">
+      <div class="h2row">
+        <div>
+          <h2>Competenze</h2>
+          <p>Una panoramica rapida di cosa trovi quando lavori con me.</p>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:14px">
+        <div class="item">
+          <h3>Metodo & qualità</h3>
+          <p>Organizzazione, check-list, documenti coerenti, gestione versioni e attenzione ai dettagli che fanno la differenza.</p>
+          <div class="tags">
+            <span class="tag">Precisione</span><span class="tag">Affidabilità</span><span class="tag">Problem solving</span>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Comunicazione</h3>
+          <p>Spiego in modo comprensibile anche temi complessi: utile con cittadini, amministrazioni, imprese e scuole.</p>
+          <div class="tags">
+            <span class="tag">Chiarezza</span><span class="tag">Sintesi</span><span class="tag">Mediazione</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGETTI -->
+    <section id="progetti">
+      <div class="h2row">
+        <div>
+          <h2>Portfolio</h2>
+          <p>Qui inserisci 6–9 lavori/progetti. Ho messo esempi pronti da sostituire.</p>
+        </div>
+      </div>
+
+      <div class="projects" style="margin-top:14px">
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">🏗️</div>
+            <div>
+              <h3>Direzione Lavori – intervento su opera pubblica</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">DL</span><span class="tag">SAL</span><span class="tag">Verbali</span>
+              </div>
+            </div>
+          </div>
+          <p>Gestione tecnica di cantiere, controllo esecutivo, contabilità e supporto al coordinamento operativo.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Sostituisci con link a PDF/Drive/Repo'); return false;">Apri scheda</a>
+            <a class="plink" href="#" onclick="alert('Sostituisci con foto o gallery'); return false;">Foto/Allegati</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">📄</div>
+            <div>
+              <h3>Documentazione tecnica e atti</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">Relazioni</span><span class="tag">Capitolati</span><span class="tag">Istruttorie</span>
+              </div>
+            </div>
+          </div>
+          <p>Impostazione chiara e completa dei documenti: struttura, riferimenti e allegati per ridurre rischi e ambiguità.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Inserisci qui un PDF di esempio'); return false;">Esempio PDF</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">🌦️</div>
+            <div>
+              <h3>Monitoraggio meteo-ambientale</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">Stazioni</span><span class="tag">Webcam</span><span class="tag">Dati</span>
+              </div>
+            </div>
+          </div>
+          <p>Progetti di sensori e raccolta dati: installazione, interpretazione e comunicazione al pubblico/enti.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Inserisci link al tuo sito/portfolio meteo'); return false;">Vai al progetto</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <div>
+              <h3>Impianti & sicurezza</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">Impianti</span><span class="tag">Verifiche</span><span class="tag">Normativa</span>
+              </div>
+            </div>
+          </div>
+          <p>Supporto tecnico su impianti, controlli, documentazione e gestione degli aspetti di sicurezza correlati.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Inserisci scheda intervento'); return false;">Dettagli</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">🎓</div>
+            <div>
+              <h3>Formazione e divulgazione</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">Scuole</span><span class="tag">Eventi</span><span class="tag">Slide</span>
+              </div>
+            </div>
+          </div>
+          <p>Lezioni, incontri e presentazioni tecniche: contenuti chiari, visual curato e taglio operativo.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Inserisci link a presentazione'); return false;">Vedi materiali</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="top">
+            <div class="icon" aria-hidden="true">🧩</div>
+            <div>
+              <h3>Consulenze tecniche</h3>
+              <div class="tags" style="margin-top:8px">
+                <span class="tag">Analisi</span><span class="tag">Perizie</span><span class="tag">Supporto</span>
+              </div>
+            </div>
+          </div>
+          <p>Relazioni e analisi tecniche mirate: obiettivo, fonti dati, metodo e conclusioni “difendibili”.</p>
+          <div class="bottom">
+            <a class="plink" href="#" onclick="alert('Inserisci case study'); return false;">Case study</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section id="contatti" class="card" style="margin-top:18px">
+      <div class="pad">
+        <div class="h2row">
+          <div>
+            <h2>Contatti</h2>
+            <p>Scrivimi per una richiesta, una collaborazione o per ricevere una scheda lavori/servizi.</p>
+          </div>
+        </div>
+
+        <div class="contact" style="margin-top:14px">
+          <div class="item">
+            <h3>Messaggio rapido</h3>
+            <p style="margin-top:6px">Compila i campi: il pulsante aprirà la tua email con il testo già pronto.</p>
+
+            <form onsubmit="sendEmail(event)" class="list" style="margin-top:12px">
+              <label>
+                <small>Nome e Cognome</small><br>
+                <input id="name" required placeholder="Es. Mario Rossi"
+                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.22); color:var(--text);" />
+              </label>
+              <label>
+                <small>Email</small><br>
+                <input id="email" type="email" required placeholder="Es. mario@email.it"
+                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.22); color:var(--text);" />
+              </label>
+              <label>
+                <small>Messaggio</small><br>
+                <textarea id="msg" required rows="5" placeholder="Scrivi qui cosa ti serve (tipo attività, luogo, tempi, documenti disponibili)…"
+                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.22); color:var(--text); resize:vertical;"></textarea>
+              </label>
+              <div class="ctaRow" style="margin-top:4px">
+                <button class="btn primary" type="submit" style="cursor:pointer">📨 Invia email</button>
+                <button class="btn" type="button" onclick="copyContacts()" style="cursor:pointer">📋 Copia contatti</button>
+              </div>
+
+              <p class="note" style="margin-top:10px">
+                <b>Nota:</b> aggiorna qui sotto i tuoi recapiti reali (email/telefono/PEC) e i link ai profili.
+              </p>
+            </form>
+          </div>
+
+          <div class="item">
+            <h3>Recapiti</h3>
+            <div class="list" style="margin-top:10px">
+              <div class="row">
+                <div>📧</div>
+                <div>
+                  <b>Email</b>
+                  <small><a href="mailto:TUAMAIL@esempio.it">TUAMAIL@esempio.it</a></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>☎️</div>
+                <div>
+                  <b>Telefono</b>
+                  <small><a href="tel:+390000000000">+39 000 000 0000</a></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>📨</div>
+                <div>
+                  <b>PEC (opzionale)</b>
+                  <small><a href="mailto:TUAPEC@pec.it">TUAPEC@pec.it</a></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>🌐</div>
+                <div>
+                  <b>Link utili</b>
+                  <small>
+                    <a href="#" onclick="alert('Inserisci link LinkedIn'); return false;">LinkedIn</a> •
+                    <a href="#" onclick="alert('Inserisci link GitHub'); return false;">GitHub</a> •
+                    <a href="#" onclick="alert('Inserisci link portfolio'); return false;">Portfolio</a>
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="note">
+              <b>Operatività</b><br/>
+              Italia • Disponibile per sopralluoghi e attività da remoto su documentazione/progettazione.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="sep"></div>
+      <p style="margin:14px 0 0">
+        © <span id="year"></span> Ing. Gianfranco Spensieri — Sito su GitHub Pages • <a href="#top">Torna su</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // anno automatico
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // COMPILA EMAIL: cambia qui la tua email reale
+    const DEST_EMAIL = "TUAMAIL@esempio.it";
+
+    function sendEmail(e){
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+
+      const subject = encodeURIComponent("Richiesta contatto dal sito – " + name);
+      const body = encodeURIComponent(
+        "Nome: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Messaggio:\n" + msg + "\n\n" +
+        "—\nInviato dal sito GitHub Pages"
+      );
+
+      window.location.href = `mailto:${DEST_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    function copyContacts(){
+      const text =
+`Ing. Gianfranco Spensieri
+Email: TUAMAIL@esempio.it
+Telefono: +39 000 000 0000
+PEC: TUAPEC@pec.it`;
+      navigator.clipboard.writeText(text).then(()=>{
+        alert("Contatti copiati negli appunti ✅");
+      }).catch(()=>{
+        alert("Non riesco a copiare automaticamente. Seleziona e copia i contatti manualmente.");
+      });
+    }
+
+    // finto download CV: sostituisci con un vero link PDF quando lo carichi nel repo
+    function downloadCV(){
+      alert("Carica il tuo CV in PDF nel repo (es. 'cv.pdf') e sostituisci questa funzione con un link diretto.");
+    }
+  </script>
+</body>
+</html>
