@@ -1,620 +1,711 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Programmatore | Sviluppo Web e Software</title>
-  <meta name="description" content="Portfolio da programmatore: sviluppo web, interfacce moderne, ottimizzazione performance e progetti software. Nessun contatto pubblico." />
-  <meta name="theme-color" content="#070a14" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VeloceCargo — Scrollytelling 3D Frame Sequence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    :root{
-      --bg:#060813;
-      --line: rgba(255,255,255,.12);
-      --text:#eef2ff;
-      --muted:#b8c2ff;
-      --muted2:#8e98c9;
-      --aqua:#6ee7ff;
-      --violet:#9b8cff;
-      --lime:#7CFFB2;
-      --shadow: 0 18px 70px rgba(0,0,0,.55);
-      --radius: 20px;
-      --max: 1120px;
+    html {
+      scroll-behavior: smooth;
+      background-color: #09090b;
+      color: #fafafa;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 12% 10%, rgba(110,231,255,.20), transparent 55%),
-        radial-gradient(900px 500px at 88% 18%, rgba(155,140,255,.20), transparent 55%),
-        radial-gradient(900px 500px at 50% 110%, rgba(124,255,178,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg), #040614 60%, #03040f);
-      line-height:1.55;
-      overflow-x:hidden;
+    body {
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(12px);
-      background: rgba(6,8,19,.55);
-      border-bottom:1px solid var(--line);
+    .glass-card {
+      background: rgba(18, 18, 22, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
     }
-    .nav .wrap{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    .story-beat {
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; text-decoration:none;
-      font-weight:900; letter-spacing:.3px;
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-    .mark{
-      width:38px; height:38px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(110,231,255,.95), rgba(155,140,255,.95));
-      box-shadow: 0 18px 55px rgba(110,231,255,.22);
-      position:relative;
-      overflow:hidden;
+    ::-webkit-scrollbar-track {
+      background: #09090b;
     }
-    .mark:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 45%);
-      transform: rotate(25deg);
-      opacity:.7;
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 999px;
     }
-    .brand span:last-child{
-      display:flex; flex-direction:column; line-height:1.05;
-    }
-    .brand .t1{font-size:14px}
-    .brand .t2{font-size:12px; color:var(--muted); font-weight:800}
-    .links{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    .links a{
-      text-decoration:none; font-weight:800; font-size:13px;
-      color:var(--muted);
-      padding:10px 12px; border-radius:999px;
-      border:1px solid transparent;
-      background: transparent;
-    }
-    .links a:hover{
-      color:var(--text);
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
-    }
-
-    /* HERO */
-    .hero{padding:34px 0 12px}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    @media (max-width: 960px){
-      .heroGrid{grid-template-columns:1fr}
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .card:after{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(600px 240px at 20% 0%, rgba(110,231,255,.18), transparent 60%),
-                  radial-gradient(540px 220px at 90% 10%, rgba(155,140,255,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .pad{padding:20px; position:relative; z-index:2}
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      font-size:12px;
-      color:var(--muted);
-      font-weight:900;
-    }
-    .spark{
-      width:10px; height:10px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.25));
-      box-shadow: 0 0 0 7px rgba(110,231,255,.14);
-      border:1px solid rgba(255,255,255,.18);
-    }
-    h1{
-      margin:12px 0 10px;
-      font-size: clamp(28px, 3.6vw, 46px);
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size: clamp(15px, 1.35vw, 18px);
-      max-width: 70ch;
-    }
-    .badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
-    .badge{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:13px;
-      font-weight:850;
-    }
-
-    .sideBox{display:grid; gap:12px}
-    .mini{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      border-radius: 18px;
-      padding:14px;
-    }
-    .mini b{display:block; font-size:16px; letter-spacing:-.01em}
-    .mini span{color:var(--muted); font-weight:700; font-size:13px}
-    .meter{
-      margin-top:10px;
-      height:10px; border-radius:999px;
-      background: rgba(255,255,255,.08);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .meter > i{
-      display:block; height:100%;
-      width: 78%;
-      background: linear-gradient(90deg, rgba(110,231,255,.9), rgba(155,140,255,.9), rgba(124,255,178,.8));
-      box-shadow: 0 0 40px rgba(110,231,255,.22);
-      border-radius:999px;
-      animation: fill 1.2s ease-out both;
-    }
-    @keyframes fill{from{width:12%}to{width:78%}}
-
-    /* Sections */
-    section{padding:18px 0}
-    .headRow{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    h2{
-      margin:0;
-      font-size: clamp(20px, 2.3vw, 28px);
-      letter-spacing:-.01em;
-    }
-    .lead{margin:0; color:var(--muted); max-width: 72ch}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr 1fr} }
-    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
-
-    .tile{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.045);
-      border-radius: 18px;
-      padding:16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .tile:before{
-      content:"";
-      position:absolute; inset:-80px -120px auto auto;
-      width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(110,231,255,.28), transparent 60%);
-      transform: rotate(25deg);
-      opacity:.85;
-      pointer-events:none;
-    }
-    .tile h3{margin:0 0 6px; font-size:16px}
-    .tile p{margin:0; color:var(--muted); font-size:14px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .chip{
-      font-size:12px; font-weight:900;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      opacity:.95;
-    }
-
-    /* Portfolio */
-    .projects{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .projects{grid-template-columns:1fr 1fr} }
-    @media (max-width: 640px){ .projects{grid-template-columns:1fr} }
-    .proj{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 18px;
-      overflow:hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.08));
-      min-height: 190px;
-      display:flex; flex-direction:column;
-    }
-    .projTop{
-      padding:16px;
-      display:flex; gap:10px; align-items:center;
-    }
-    .ico{
-      width:40px; height:40px; border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(155,140,255,.18));
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      box-shadow: 0 18px 60px rgba(155,140,255,.10);
-    }
-    .proj h3{margin:0; font-size:15px}
-    .proj .meta{color:var(--muted2); font-weight:800; font-size:12px; margin-top:2px}
-    .proj p{margin:6px 16px 0; color:var(--muted); font-size:14px}
-    .projBottom{
-      margin-top:auto;
-      padding:14px 16px 16px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      border-top:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.12);
-    }
-    .plink{
-      padding:9px 10px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      font-weight:900;
-      font-size:13px;
-      text-decoration:none;
-    }
-    .plink:hover{background: rgba(255,255,255,.08)}
-    .plink[aria-disabled="true"]{
-      opacity:.55;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-
-    /* FAQ */
-    details{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-      padding:14px 14px;
-    }
-    details + details{margin-top:10px}
-    summary{
-      cursor:pointer;
-      font-weight:950;
-      color:var(--text);
-    }
-    details p{margin:10px 0 0; color:var(--muted)}
-
-    footer{
-      margin-top:22px;
-      padding:22px 0 40px;
-      color:var(--muted2);
-      font-size:13px;
-      border-top:1px solid rgba(255,255,255,.10);
-    }
-
-    /* Subtle animation blob */
-    .floaty{
-      position:fixed;
-      inset:auto auto -220px -220px;
-      width:520px; height:520px;
-      background: radial-gradient(circle at 35% 35%, rgba(110,231,255,.24), transparent 60%),
-                  radial-gradient(circle at 70% 70%, rgba(155,140,255,.18), transparent 60%);
-      opacity:.75;
-      pointer-events:none;
-      transform: rotate(12deg);
-      animation: drift 10s ease-in-out infinite alternate;
-      z-index:0;
-    }
-    @keyframes drift{
-      from{transform: translate(0,0) rotate(10deg)}
-      to{transform: translate(60px, -40px) rotate(18deg)}
-    }
-    .privacyNote{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:13px;
-      border:1px dashed rgba(255,255,255,.16);
-      background: rgba(255,255,255,.03);
-      padding:12px;
-      border-radius:16px;
-    }
-    code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      color: rgba(255,255,255,.92);
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
     }
   </style>
 </head>
+<body class="bg-zinc-950 text-zinc-50 selection:bg-sky-500 selection:text-white">
 
-<body>
-  <div class="floaty" aria-hidden="true"></div>
-
-  <!-- NAV -->
-  <header class="nav">
-    <div class="wrap">
-      <a class="brand" href="#top" aria-label="Vai in alto">
-        <span class="mark" aria-hidden="true"></span>
-        <span>
-          <span class="t1">PORTFOLIO PROGRAMMATORE</span>
-          <span class="t2">Web • UI • Performance • Progetti</span>
-        </span>
+  <!-- Barra di navigazione superiore fissa -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-zinc-950/75 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-zinc-950 font-extrabold shadow-lg shadow-sky-500/20">
+          VC
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-white text-lg">Veloce<span class="text-sky-400">Cargo</span></span>
+          <span class="hidden sm:inline-block ml-2 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+            Sequence 120 FPS
+          </span>
+        </div>
       </a>
-      <nav class="links" aria-label="Menu">
-        <a href="#profilo">Profilo</a>
-        <a href="#cosa-so-fare">Cosa so fare</a>
-        <a href="#stack">Stack</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#processo">Processo</a>
-        <a href="#faq">FAQ</a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <a href="#scrolly-stage" class="hover:text-white transition-colors">Esplora 360°</a>
+        <a href="#specifiche" class="hover:text-white transition-colors">Specifiche</a>
+        <a href="#contatti" class="hover:text-white transition-colors">Preventivo</a>
       </nav>
+
+      <a href="#contatti" class="rounded-full bg-white px-4 py-2 text-xs font-semibold text-zinc-950 hover:bg-sky-400 hover:text-zinc-950 transition-all shadow-md">
+        Prenota Ritiro
+      </a>
     </div>
   </header>
 
-  <main id="top" class="wrap hero">
-    <div class="heroGrid">
-      <!-- HERO MAIN -->
-      <section class="card" id="profilo">
-        <div class="pad">
-          <div class="kicker"><span class="spark"></span> profilo tecnico (senza dati personali)</div>
-          <h1>Programmazione e sviluppo web con stile <span style="background:linear-gradient(90deg,var(--aqua),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent;">premium</span>.</h1>
-          <p class="sub">
-            Questo sito è una vetrina tecnica: mostra <b>competenze</b>, <b>approccio</b> e <b>progetti</b>.
-            Nessun riferimento personale, nessun contatto pubblico: solo <b>risultati</b> e <b>metodo</b>.
+  <!-- SEZIONE PRINCIPALE: IMMAGINE / SEQUENZA 3D GUIDATA DALLO SCROLL -->
+  <section id="scrolly-stage" class="relative h-[480vh] w-full">
+    <!-- Contenitore Sticky a schermo intero -->
+    <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-zinc-950">
+      
+      <!-- Bagliore ambientale di sfondo -->
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(56,189,248,0.13),transparent_62%)]"></div>
+
+      <!-- Canvas ad alta risoluzione per il rendering fluido dei fotogrammi -->
+      <canvas id="sequence-canvas" class="h-full w-full block"></canvas>
+
+      <!-- OVERLAY TESTUALI SINCRONIZZATI CON LO SCROLL -->
+      
+      <!-- Fase 1 (0% - 24%): Vista Frontale -->
+      <div id="beat-0" class="story-beat pointer-events-none absolute inset-x-0 top-24 md:top-28 flex flex-col items-center text-center px-6">
+        <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-sky-300">
+          <span class="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          Scorri per animare il veicolo
+        </span>
+        <h1 class="max-w-3xl text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
+          Ogni movimento, <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-sky-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">sotto il tuo controllo.</span>
+        </h1>
+        <p class="mt-4 max-w-xl text-sm sm:text-base text-zinc-400">
+          Scorri verso il basso: il furgone ruota a 360°, apre i portelloni posteriori e mostra l’interno in tempo reale.
+        </p>
+      </div>
+
+      <!-- Fase 2 (26% - 50%): Profilo Laterale 3/4 -->
+      <div id="beat-1" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute left-6 right-6 md:left-14 md:right-auto bottom-24 md:bottom-auto md:top-1/2 md:-translate-y-1/2 max-w-md">
+        <div class="glass-card rounded-2xl p-6 sm:p-7">
+          <div class="flex items-center justify-between text-xs font-mono text-sky-400 mb-2">
+            <span>FASE 01 // AERODINAMICA</span>
+            <span>360° VIEW</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Design compatto, capacità massima</h2>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-300">
+            Telaio ribassato per carico rapido in centro città e autonomia estesa fino a 420 km con singola ricarica.
           </p>
-
-          <div class="badges" aria-label="Punti di forza">
-            <span class="badge">⚡ Siti veloci</span>
-            <span class="badge">📱 Mobile-first</span>
-            <span class="badge">🧠 Codice pulito</span>
-            <span class="badge">🧩 UI moderna</span>
+          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 text-xs">
+            <div>
+              <span class="text-zinc-500 block">Volume utile</span>
+              <span class="font-semibold text-white text-sm">11,5 m³</span>
+            </div>
+            <div>
+              <span class="text-zinc-500 block">Portata massima</span>
+              <span class="font-semibold text-white text-sm">1.450 kg</span>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <div class="privacyNote">
-            <b>Nota privacy:</b> in questa versione il sito è volutamente “vetrina” e non espone contatti o dati personali.
+      <!-- Fase 3 (52% - 78%): Apertura Portelloni & Carico -->
+      <div id="beat-2" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute left-6 right-6 md:left-auto md:right-14 bottom-24 md:bottom-auto md:top-1/2 md:-translate-y-1/2 max-w-md">
+        <div class="glass-card rounded-2xl p-6 sm:p-7">
+          <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-2">
+            <span>FASE 02 // VANO DI CARICO</span>
+            <span>APERTURA 270°</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Accesso posteriore intelligente</h2>
+          <p class="mt-2.5 text-sm leading-relaxed text-zinc-300">
+            Sensori di peso integrati su ogni scaffale, illuminazione LED automatica e blocchi di sicurezza anti-urto per ogni collo.
+          </p>
+          <ul class="mt-4 space-y-2 border-t border-white/10 pt-4 text-xs text-zinc-300">
+            <li class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+              Tracciamento GPS e temperatura in tempo reale
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+              Soglia di carico ribassata a 52 cm da terra
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Fase 4 (80% - 100%): Chiusura e Partenza -->
+      <div id="beat-3" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute inset-x-0 bottom-24 flex flex-col items-center text-center px-6">
+        <div class="glass-card rounded-2xl px-7 py-6 max-w-lg pointer-events-auto">
+          <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Pronto a partire</span>
+          <h2 class="mt-1 text-2xl sm:text-3xl font-bold text-white">Consegne puntuali, zero pensieri.</h2>
+          <p class="mt-2 text-sm text-zinc-300">
+            Pianifica la tua spedizione in meno di 60 secondi con tariffe trasparenti.
+          </p>
+          <div class="mt-5 flex flex-wrap justify-center gap-3">
+            <a href="#contatti" class="rounded-xl bg-sky-400 px-5 py-2.5 text-sm font-semibold text-zinc-950 hover:bg-sky-300 transition-colors">
+              Calcola Preventivo
+            </a>
+            <a href="#specifiche" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors">
+              Scopri i Dettagli
+            </a>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- HERO SIDE -->
-      <aside class="sideBox">
-        <div class="mini">
-          <b>Focus: qualità</b>
-          <span>Interfacce curate e leggibili</span>
-          <div class="meter"><i style="width:82%"></i></div>
+      <!-- Indicatore HUD Frame & Progresso in basso -->
+      <div class="pointer-events-none absolute bottom-6 inset-x-6 md:inset-x-14 flex items-center justify-between text-xs font-mono text-zinc-400">
+        <div class="flex items-center gap-3">
+          <span id="frame-counter" class="text-white font-semibold">FRAME 001 / 120</span>
+          <span id="phase-label" class="hidden sm:inline text-zinc-500">— VISTA FRONTALE</span>
         </div>
-        <div class="mini">
-          <b>Focus: performance</b>
-          <span>Ottimizzazione reale</span>
-          <div class="meter"><i style="width:88%"></i></div>
+        <div class="flex items-center gap-3">
+          <div class="h-1.5 w-28 sm:w-44 overflow-hidden rounded-full bg-white/10">
+            <div id="scroll-progress-bar" class="h-full w-0 bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-75"></div>
+          </div>
+          <span id="percent-counter">0%</span>
         </div>
-        <div class="mini">
-          <b>Focus: ordine</b>
-          <span>Strutture chiare e manutenibili</span>
-          <div class="meter"><i style="width:76%"></i></div>
-        </div>
-      </aside>
+      </div>
+
     </div>
+  </section>
 
-    <!-- COSA SO FARE -->
-    <section id="cosa-so-fare">
-      <div class="headRow">
-        <div>
-          <h2>Cosa so fare</h2>
-          <p class="lead">Competenze pratiche: ciò che sviluppo e consegno (come qualità tecnica).</p>
-        </div>
+  <!-- SEZIONE SPECIFICHE PULITE -->
+  <section id="specifiche" class="relative z-10 border-t border-white/10 bg-zinc-950 py-24 px-6">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-2xl">
+        <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Tecnologia & Flotta</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-white">Progettato per la logistica moderna.</h2>
+        <p class="mt-3 text-zinc-400">Unendo velocità operativa, monitoraggio costante e mezzi a basse emissioni.</p>
       </div>
 
-      <div class="grid">
-        <div class="tile">
-          <h3>UI moderne e responsive</h3>
-          <p>Layout puliti, leggibili e coerenti su smartphone, tablet e desktop.</p>
-          <div class="chips">
-            <span class="chip">Responsive</span><span class="chip">UX</span><span class="chip">Accessibilità</span>
-          </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 font-mono font-bold">01</div>
+          <h3 class="text-lg font-semibold text-white">Consegna Espressa 24h</h3>
+          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Ritiro diretto presso la tua sede e consegna garantita entro 24 ore su tutto il territorio nazionale.</p>
         </div>
-        <div class="tile">
-          <h3>Performance</h3>
-          <p>Caricamento rapido con risorse ottimizzate e struttura leggera.</p>
-          <div class="chips">
-            <span class="chip">Ottimizzazione</span><span class="chip">Lazy-load</span><span class="chip">Best practice</span>
-          </div>
+        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 font-mono font-bold">02</div>
+          <h3 class="text-lg font-semibold text-white">Tracking Live al Metro</h3>
+          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Link diretto condivisibile con il destinatario per seguire il furgone sulla mappa minuto per minuto.</p>
         </div>
-        <div class="tile">
-          <h3>Componenti e funzioni</h3>
-          <p>Sezioni modulari, componenti riutilizzabili e logica front-end.</p>
-          <div class="chips">
-            <span class="chip">Componenti</span><span class="chip">JS</span><span class="chip">Manutenzione</span>
-          </div>
-        </div>
-        <div class="tile">
-          <h3>SEO tecnico (base)</h3>
-          <p>Struttura corretta, meta, heading, performance e semantica.</p>
-          <div class="chips">
-            <span class="chip">Meta</span><span class="chip">Semantica</span><span class="chip">Struttura</span>
-          </div>
-        </div>
-        <div class="tile">
-          <h3>Progetti “puliti”</h3>
-          <p>Codice ordinato, commenti dove servono, naming sensato.</p>
-          <div class="chips">
-            <span class="chip">Clean code</span><span class="chip">Refactor</span><span class="chip">Documentazione</span>
-          </div>
-        </div>
-        <div class="tile">
-          <h3>Restyling e miglioramenti</h3>
-          <p>Riorganizzazione, modernizzazione grafica, ottimizzazioni mirate.</p>
-          <div class="chips">
-            <span class="chip">Restyling</span><span class="chip">UI</span><span class="chip">Performance</span>
-          </div>
+        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 font-mono font-bold">03</div>
+          <h3 class="text-lg font-semibold text-white">Carico Assicurato 100%</h3>
+          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Copertura completa inclusa su ogni spedizione, con verifica fotografica digitale alla consegna.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- STACK -->
-    <section id="stack">
-      <div class="headRow">
-        <div>
-          <h2>Stack</h2>
-          <p class="lead">Tecnologie dichiarate in modo semplice e credibile (modifica con le tue reali competenze).</p>
-        </div>
+  <!-- SEZIONE PREVENTIVO -->
+  <section id="contatti" class="relative z-10 border-t border-white/10 bg-zinc-900/40 py-24 px-6">
+    <div class="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-zinc-900/80 p-8 sm:p-12 shadow-2xl">
+      <div class="text-center">
+        <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Preventivo Rapido</span>
+        <h2 class="mt-2 text-3xl font-bold text-white">Organizza la tua spedizione</h2>
+        <p class="mt-2 text-sm text-zinc-400">Compila i campi qui sotto per ricevere una quotazione immediata.</p>
       </div>
 
-      <div class="grid">
-        <div class="tile">
-          <h3>Front-end</h3>
-          <p>Interfacce e comportamento lato client.</p>
-          <div class="chips">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+      <form id="quote-form" class="mt-8 space-y-5">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Città di Ritiro</label>
+            <input type="text" required placeholder="Es. Milano" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Città di Consegna</label>
+            <input type="text" required placeholder="Es. Roma" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
           </div>
         </div>
-        <div class="tile">
-          <h3>Strumenti</h3>
-          <p>Organizzazione, debug e qualità del lavoro.</p>
-          <div class="chips">
-            <span class="chip">Debug</span><span class="chip">Testing base</span><span class="chip">Versioning</span>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Tipologia Carico</label>
+            <select class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+              <option>Pacchi / Colli singoli</option>
+              <option>Bancali / Pallet (1–4)</option>
+              <option>Furgone dedicato completo</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Email aziendale o telefono</label>
+            <input type="text" required placeholder="nome@azienda.it" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
           </div>
         </div>
-        <div class="tile">
-          <h3>Qualità</h3>
-          <p>Attenzione a struttura, accessibilità e performance.</p>
-          <div class="chips">
-            <span class="chip">A11y</span><span class="chip">Performance</span><span class="chip">SEO tecnico</span>
-          </div>
-        </div>
-      </div>
+        <button type="submit" class="w-full rounded-xl bg-sky-400 py-3.5 text-sm font-bold text-zinc-950 hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20">
+          Invia Richiesta
+        </button>
+        <p id="form-feedback" class="hidden text-center text-sm font-medium text-emerald-400 pt-2">
+          Richiesta inviata! Ti risponderemo entro 15 minuti.
+        </p>
+      </form>
+    </div>
+  </section>
 
-      <div class="privacyNote">
-        <b>Consiglio:</b> qui inserisci SOLO ciò che sai davvero usare. Meglio 6 skill vere che 20 inventate.
-      </div>
-    </section>
+  <footer class="border-t border-white/10 bg-zinc-950 py-10 px-6 text-center text-xs text-zinc-500">
+    <p>© 2026 VeloceCargo — Tutti i diritti riservati.</p>
+  </footer>
 
-    <!-- PORTFOLIO -->
-    <section id="portfolio">
-      <div class="headRow">
-        <div>
-          <h2>Portfolio</h2>
-          <p class="lead">Esempi vetrina: puoi sostituire titolo/descrizione con i tuoi lavori reali (anche senza link pubblico).</p>
-        </div>
-      </div>
-
-      <div class="projects">
-        <article class="proj">
-          <div class="projTop">
-            <div class="ico">🌐</div>
-            <div>
-              <h3>Sito vetrina moderno</h3>
-              <div class="meta">UI premium • responsive • layout pulito</div>
-            </div>
-          </div>
-          <p>Struttura chiara, sezioni organizzate, attenzione a leggibilità e gerarchia visiva.</p>
-          <div class="projBottom">
-            <a class="plink" aria-disabled="true">Demo (non pubblica)</a>
-            <a class="plink" aria-disabled="true">Codice (non pubblico)</a>
-          </div>
-        </article>
-
-        <article class="proj">
-          <div class="projTop">
-            <div class="ico">🧩</div>
-            <div>
-              <h3>Interfaccia a componenti</h3>
-              <div class="meta">Componenti • riuso • manutenzione</div>
-            </div>
-          </div>
-          <p>Sezioni modulari riutilizzabili con stile coerente e codice ordinato.</p>
-          <div class="projBottom">
-            <a class="plink" aria-disabled="true">Screenshot (interni)</a>
-            <a class="plink" aria-disabled="true">Note tecniche</a>
-          </div>
-        </article>
-
-        <article class="proj">
-          <div class="projTop">
-            <div class="ico">⚡</div>
-            <div>
-              <h3>Ottimizzazione performance</h3>
-              <div class="meta">Peso ridotto • caricamento rapido</div>
-            </div>
-          </div>
-          <p>Ottimizzazione risorse e struttura per migliorare velocità e user experience.</p>
-          <div class="projBottom">
-            <a class="plink" aria-disabled="true">Prima/Dopo</a>
-            <a class="plink" aria-disabled="true">Checklist</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="privacyNote">
-        <b>Vuoi renderlo più credibile senza link?</b> Aggiungi 1–2 righe “Problema → Soluzione → Risultato” per ogni progetto.
-      </div>
-    </section>
-
-    <!-- PROCESSO -->
-    <section id="processo">
-      <div class="headRow">
-        <div>
-          <h2>Processo di lavoro</h2>
-          <p class="lead">Un modo “da professionista” per spiegare come ragioni (anche senza contatti).</p>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="tile">
-          <h3>1) Analisi</h3>
-          <p>Obiettivo, pubblico, contenuti, vincoli e struttura informativa.</p>
-          <div class="chips"><span class="chip">Brief</span><span class="chip">Struttura</span></div>
-        </div>
-        <div class="tile">
-          <h3>2) Design</h3>
-          <p>Gerarchia visiva, leggibilità, layout coerente, mobile-first.</p>
-          <div class="chips"><span class="chip">UI</span><span class="chip">UX</span></div>
-        </div>
-        <div class="tile">
-          <h3>3) Sviluppo</h3>
-          <p>Codice pulito, componenti, performance e test di base.</p>
-          <div class="chips"><span class="chip">Clean</span><span class="chip">Test</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="headRow">
-        <div>
-          <h2>FAQ</h2>
-          <p class="lead">Domande comuni, senza inviti al contatto.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:14px; display:grid; gap:10px">
-        <details>
-          <summary>Perché un sito “pulito” è meglio di uno pieno di effetti?</summary>
-          <p>Perché leggibilità, velocità e struttura contano più degli effetti: migliorano esperienza utente e qualità percepita.</p>
-        </details>
-        <details>
-          <summary>Come dimostri qualità anche senza link pubblici?</summary>
-          <p>Con descrizioni chiare: problema, soluzione tecnica adottata e risultato (performance, struttura, usabilità).</p>
-        </details>
-        <details>
-          <summary>Questo sito può restare anonimo?</summary>
-          <p>Sì: è progettato per non contenere dati personali e non offrire contatto pubblico.</p>
-        </details>
-      </div>
-    </section>
-
-    <footer>
-      © <span id="year"></span> • Portfolio tecnico (senza dati personali) • <a href="#top">Torna su</a>
-    </footer>
-  </main>
-
+  <!-- MOTORE DI ANIMAZIONE FRAME-BY-FRAME SU CANVAS -->
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const canvas = document.getElementById('sequence-canvas');
+    const ctx = canvas.getContext('2d');
+    const stage = document.getElementById('scrolly-stage');
+
+    const TOTAL_FRAMES = 120;
+    let currentFrame = 0;
+    let targetFrame = 0;
+
+    // =========================================================================
+    // OPZIONE A (ATTIVA): Render 3D vettoriale ad alta definizione (zero file esterni)
+    // OPZIONE B: Se vuoi usare le TUE immagini reali (es. frames/frame_001.webp ...),
+    // imposta USE_CUSTOM_IMAGES = true e carica la cartella "frames/" su GitHub!
+    // =========================================================================
+    const USE_CUSTOM_IMAGES = false;
+    const customImages = [];
+
+    if (USE_CUSTOM_IMAGES) {
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        const num = String(i).padStart(3, '0');
+        img.src = `./frames/frame_${num}.webp`;
+        customImages.push(img);
+      }
+    }
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      renderFrame(Math.round(currentFrame));
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Funzione di utilità per interpolazioni morbide
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(max, val));
+    }
+    function smoothstep(edge0, edge1, x) {
+      const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
+      return t * t * (3 - 2 * t);
+    }
+
+    // Disegna il singolo fotogramma (0 -> 119)
+    function renderFrame(frameIndex) {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      // Se l'utente ha attivato immagini reali custom
+      if (USE_CUSTOM_IMAGES && customImages[frameIndex] && customImages[frameIndex].complete) {
+        const img = customImages[frameIndex];
+        const scale = Math.min(w / img.width, h / img.height) * 0.88;
+        const iw = img.width * scale;
+        const ih = img.height * scale;
+        ctx.drawImage(img, (w - iw) / 2, (h - ih) / 2, iw, ih);
+        return;
+      }
+
+      const t = frameIndex / (TOTAL_FRAMES - 1); // Progresso normalizzato 0.0 -> 1.0
+
+      // Fasi del movimento del furgone:
+      // 1) 0.00 -> 0.35: Rotazione dal frontale al profilo 3/4 laterale
+      // 2) 0.35 -> 0.55: Rotazione verso il retro + apertura portelloni posteriori
+      // 3) 0.55 -> 0.78: Portelloni aperti con luce interna e pacchi visibili
+      // 4) 0.78 -> 1.00: Chiusura portelloni e partenza veloce verso l'orizzonte
+
+      const rotToSide = smoothstep(0.0, 0.32, t);
+      const rotToRear = smoothstep(0.32, 0.54, t);
+      const doorOpen = smoothstep(0.48, 0.62, t) * (1 - smoothstep(0.76, 0.86, t));
+      const driveAway = smoothstep(0.84, 1.0, t);
+
+      const centerX = w * 0.5;
+      const baseCenterY = h * 0.56 - driveAway * (h * 0.14);
+      const scaleBase = Math.min(w, h) / 760 * (1 - driveAway * 0.62);
+
+      ctx.save();
+      ctx.translate(centerX, baseCenterY);
+      ctx.scale(scaleBase, scaleBase);
+
+      // Griglia prospettica pavimento studio
+      ctx.save();
+      ctx.strokeStyle = `rgba(56, 189, 248, ${0.14 * (1 - driveAway * 0.7)})`;
+      ctx.lineWidth = 1;
+      for (let gx = -520; gx <= 520; gx += 65) {
+        ctx.beginPath();
+        ctx.moveTo(gx * 0.55, 65);
+        ctx.lineTo(gx * 1.45, 220);
+        ctx.stroke();
+      }
+      for (let gy = 85; gy <= 210; gy += 30) {
+        ctx.beginPath();
+        ctx.moveTo(-480, gy);
+        ctx.lineTo(480, gy);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Ombra morbida sotto il furgone
+      const shadowGrad = ctx.createRadialGradient(0, 118, 20, 0, 118, 240);
+      shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
+      shadowGrad.addColorStop(0.6, 'rgba(0, 0, 0, 0.45)');
+      shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = shadowGrad;
+      ctx.beginPath();
+      ctx.ellipse(0, 118, 235 - rotToRear * 45, 34, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Calcolo dimensioni dinamiche in base all'angolo di rotazione
+      const sideFactor = Math.sin(rotToSide * Math.PI * 0.5) * (1 - rotToRear * 0.65);
+      const rearFactor = rotToRear;
+
+      const bodyWidth = 220 + sideFactor * 165 - rearFactor * 40;
+      const bodyHeight = 185;
+      const leftX = -bodyWidth / 2;
+      const topY = -85;
+
+      // Sospensione leggera (micro-molleggio)
+      const bounce = Math.sin(t * Math.PI * 10) * (1.2 + driveAway * 3);
+      ctx.translate(0, bounce);
+
+      // --- 1. FIANCATA LATERALE (visibile durante rotazione 3/4) ---
+      if (sideFactor > 0.02) {
+        ctx.save();
+        const sideGrad = ctx.createLinearGradient(leftX, topY, leftX + bodyWidth, topY + bodyHeight);
+        sideGrad.addColorStop(0, '#e4e4e7');
+        sideGrad.addColorStop(0.5, '#f4f4f5');
+        sideGrad.addColorStop(1, '#a1a1aa');
+        ctx.fillStyle = sideGrad;
+
+        ctx.beginPath();
+        ctx.roundRect(leftX, topY, bodyWidth, bodyHeight, [26, 22, 12, 12]);
+        ctx.fill();
+
+        // Fascia grafica azzurra aziendale sulla fiancata
+        ctx.fillStyle = '#0284c7';
+        ctx.fillRect(leftX + 18, topY + 95, bodyWidth - 36, 14);
+
+        // Finestrino cabina laterale
+        if (rearFactor < 0.7) {
+          ctx.fillStyle = '#09090b';
+          ctx.beginPath();
+          ctx.roundRect(leftX + 20, topY + 22, 75 * (1 - rearFactor), 54, 10);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      // --- 2. VISTA FRONTALE (Frame 0 -> 35) ---
+      if (rearFactor < 0.45) {
+        const frontAlpha = 1 - smoothstep(0.18, 0.42, t);
+        const frontW = 210 * (1 - sideFactor * 0.35);
+        const fx = -frontW / 2 - sideFactor * 75;
+
+        ctx.save();
+        ctx.globalAlpha = frontAlpha;
+
+        // Scocca frontale
+        const frontGrad = ctx.createLinearGradient(fx, topY, fx, topY + bodyHeight);
+        frontGrad.addColorStop(0, '#ffffff');
+        frontGrad.addColorStop(0.65, '#e4e4e7');
+        frontGrad.addColorStop(1, '#71717a');
+        ctx.fillStyle = frontGrad;
+        ctx.beginPath();
+        ctx.roundRect(fx, topY, frontW, bodyHeight, [32, 32, 14, 14]);
+        ctx.fill();
+
+        // Parabrezza panoramico scuro con riflesso
+        ctx.fillStyle = '#09090b';
+        ctx.beginPath();
+        ctx.roundRect(fx + 18, topY + 22, frontW - 36, 66, 14);
+        ctx.fill();
+
+        const glassGrad = ctx.createLinearGradient(fx + 18, topY + 22, fx + frontW - 18, topY + 88);
+        glassGrad.addColorStop(0, 'rgba(56, 189, 248, 0.25)');
+        glassGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.06)');
+        glassGrad.addColorStop(1, 'rgba(56, 189, 248, 0.02)');
+        ctx.fillStyle = glassGrad;
+        ctx.fill();
+
+        // Griglia frontale e logo
+        ctx.fillStyle = '#18181b';
+        ctx.beginPath();
+        ctx.roundRect(fx + 32, topY + 106, frontW - 64, 34, 8);
+        ctx.fill();
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(fx + frontW / 2, topY + 123, 7, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Fari LED anteriori luminosi
+        ctx.fillStyle = '#e0f2fe';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+        ctx.roundRect(fx + 14, topY + 112, 24, 12, 5);
+        ctx.roundRect(fx + frontW - 38, topY + 112, 24, 12, 5);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Paraurti inferiore
+        ctx.fillStyle = '#27272a';
+        ctx.beginPath();
+        ctx.roundRect(fx + 8, topY + 150, frontW - 16, 32, 10);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // --- 3. VISTA POSTERIORE + INTERNO & PORTELLONI (Frame 36 -> 120) ---
+      if (rearFactor > 0.05) {
+        const rearW = 215;
+        const rx = -rearW / 2 + (1 - rearFactor) * 70;
+
+        ctx.save();
+        ctx.globalAlpha = smoothstep(0.32, 0.48, t);
+
+        // Cornice esterna posteriore
+        ctx.fillStyle = '#d4d4d8';
+        ctx.beginPath();
+        ctx.roundRect(rx, topY, rearW, bodyHeight, [18, 18, 12, 12]);
+        ctx.fill();
+
+        // Vano interno illuminato (visibile quando i portelloni si aprono)
+        const innerX = rx + 14;
+        const innerY = topY + 14;
+        const innerW = rearW - 28;
+        const innerH = bodyHeight - 42;
+
+        ctx.fillStyle = '#09090b';
+        ctx.fillRect(innerX, innerY, innerW, innerH);
+
+        // Luce LED interna calda/azzurra
+        const cargoLight = ctx.createRadialGradient(
+          innerX + innerW / 2, innerY + 15, 10,
+          innerX + innerW / 2, innerY + innerH / 2, innerW * 0.85
+        );
+        cargoLight.addColorStop(0, `rgba(56, 189, 248, ${0.45 * doorOpen})`);
+        cargoLight.addColorStop(1, 'rgba(9, 9, 11, 0.95)');
+        ctx.fillStyle = cargoLight;
+        ctx.fillRect(innerX, innerY, innerW, innerH);
+
+        // Scaffali e pacchi organizzati dentro il vano
+        if (doorOpen > 0.05) {
+          ctx.save();
+          ctx.globalAlpha = doorOpen;
+
+          // Ripiano centrale
+          ctx.fillStyle = '#27272a';
+          ctx.fillRect(innerX + 6, innerY + innerH * 0.52, innerW - 12, 5);
+
+          // Pacchi ripiano superiore
+          const drawBox = (bx, by, bw, bh, color) => {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.roundRect(bx, by, bw, bh, 4);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(bx, by, bw, bh);
+            // Nastro adesivo
+            ctx.fillStyle = 'rgba(255,255,255,0.28)';
+            ctx.fillRect(bx + bw * 0.42, by, bw * 0.16, bh);
+          };
+
+          drawBox(innerX + 14, innerY + 24, 48, 44, '#d97706');
+          drawBox(innerX + 68, innerY + 32, 42, 36, '#b45309');
+          drawBox(innerX + 116, innerY + 18, 56, 50, '#0284c7');
+
+          // Pallet e pacchi inferiori
+          drawBox(innerX + 16, innerY + innerH * 0.52 + 12, 72, 48, '#92400e');
+          drawBox(innerX + 94, innerY + innerH * 0.52 + 20, 76, 40, '#d97706');
+
+          ctx.restore();
+        }
+
+        // Portelloni posteriori sinistro e destro che ruotano verso l'esterno
+        const halfDoorW = innerW / 2;
+        const doorPerspectiveW = halfDoorW * Math.cos(doorOpen * Math.PI * 0.46);
+        const doorSwingOut = Math.sin(doorOpen * Math.PI * 0.46) * 26;
+
+        // Portellone Sinistro
+        ctx.fillStyle = '#f4f4f5';
+        ctx.beginPath();
+        ctx.roundRect(innerX - doorSwingOut, innerY, Math.max(8, doorPerspectiveW), innerH, 4);
+        ctx.fill();
+        ctx.strokeStyle = '#71717a';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Portellone Destro
+        ctx.fillStyle = '#e4e4e7';
+        ctx.beginPath();
+        ctx.roundRect(innerX + innerW - Math.max(8, doorPerspectiveW) + doorSwingOut, innerY, Math.max(8, doorPerspectiveW), innerH, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        // Fanali posteriori rossi LED (accesi in frenata/partenza)
+        ctx.fillStyle = '#ef4444';
+        ctx.shadowColor = '#ef4444';
+        ctx.shadowBlur = 16 + driveAway * 14;
+        ctx.beginPath();
+        ctx.roundRect(rx + 4, topY + 92, 8, 42, 3);
+        ctx.roundRect(rx + rearW - 12, topY + 92, 8, 42, 3);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Paraurti posteriore e targa
+        ctx.fillStyle = '#18181b';
+        ctx.beginPath();
+        ctx.roundRect(rx + 6, topY + bodyHeight - 24, rearW - 12, 24, 8);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(rx + rearW / 2 - 34, topY + bodyHeight - 19, 68, 14, 3);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // --- 4. RUOTE ---
+      const drawWheel = (wx, wy, radiusX, radiusY) => {
+        ctx.save();
+        ctx.fillStyle = '#09090b';
+        ctx.beginPath();
+        ctx.ellipse(wx, wy, radiusX, radiusY, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#3f3f46';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Cerchione in lega
+        ctx.fillStyle = '#a1a1aa';
+        ctx.beginPath();
+        ctx.ellipse(wx, wy, radiusX * 0.55, radiusY * 0.55, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      };
+
+      if (sideFactor > 0.15) {
+        drawWheel(leftX + 55, topY + bodyHeight - 2, 26, 28);
+        drawWheel(leftX + bodyWidth - 55, topY + bodyHeight - 2, 26, 28);
+      } else {
+        drawWheel(-82, topY + bodyHeight - 2, 16, 26);
+        drawWheel(82, topY + bodyHeight - 2, 16, 26);
+      }
+
+      ctx.restore();
+    }
+
+    // Aggiornamento interfaccia e testi flottanti in base allo scroll
+    const beats = [
+      { el: document.getElementById('beat-0'), start: 0.00, end: 0.23 },
+      { el: document.getElementById('beat-1'), start: 0.26, end: 0.49 },
+      { el: document.getElementById('beat-2'), start: 0.52, end: 0.77 },
+      { el: document.getElementById('beat-3'), start: 0.80, end: 1.00 },
+    ];
+
+    const frameCounter = document.getElementById('frame-counter');
+    const phaseLabel = document.getElementById('phase-label');
+    const percentCounter = document.getElementById('percent-counter');
+    const progressBar = document.getElementById('scroll-progress-bar');
+
+    function updateUI(progress) {
+      const frameNum = Math.min(TOTAL_FRAMES, Math.max(1, Math.round(progress * (TOTAL_FRAMES - 1)) + 1));
+      const pct = Math.round(progress * 100);
+
+      frameCounter.textContent = `FRAME ${String(frameNum).padStart(3, '0')} / ${TOTAL_FRAMES}`;
+      percentCounter.textContent = `${pct}%`;
+      progressBar.style.width = `${pct}%`;
+
+      if (progress < 0.25) {
+        phaseLabel.textContent = '— VISTA FRONTALE';
+      } else if (progress < 0.50) {
+        phaseLabel.textContent = '— ROTAZIONE 3/4 LATERALE';
+      } else if (progress < 0.78) {
+        phaseLabel.textContent = '— APERTURA PORTELLONI & CARICO';
+      } else {
+        phaseLabel.textContent = '— CHIUSURA E PARTENZA';
+      }
+
+      beats.forEach((beat) => {
+        const isVisible = progress >= beat.start && progress <= beat.end;
+        if (isVisible) {
+          beat.el.style.opacity = '1';
+          beat.el.style.transform = 'translateY(0px)';
+        } else {
+          beat.el.style.opacity = '0';
+          beat.el.style.transform = 'translateY(20px)';
+        }
+      });
+    }
+
+    // Calcolo targetFrame durante lo scroll
+    function onScroll() {
+      const rect = stage.getBoundingClientRect();
+      const scrollableDistance = rect.height - window.innerHeight;
+      if (scrollableDistance <= 0) return;
+
+      const scrolled = -rect.top;
+      const progress = clamp(scrolled / scrollableDistance, 0, 1);
+      targetFrame = progress * (TOTAL_FRAMES - 1);
+      updateUI(progress);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Loop fluido a 60fps con smorzamento (lerp)
+    function animate() {
+      currentFrame += (targetFrame - currentFrame) * 0.14;
+      renderFrame(Math.round(currentFrame));
+      requestAnimationFrame(animate);
+    }
+
+    // Invio form demo
+    document.getElementById('quote-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('form-feedback').classList.remove('hidden');
+      e.target.reset();
+    });
+
+    // Avvio iniziale
+    resizeCanvas();
+    onScroll();
+    animate();
   </script>
 </body>
 </html>
