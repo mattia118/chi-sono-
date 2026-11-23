@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VeloceCargo — Scrollytelling 3D Frame Sequence</title>
+  <title>Meteo2 — Previsioni Meteo, Telecamere 4K e Webcam Live</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -15,7 +15,7 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
+          }
         }
       }
     }
@@ -23,21 +23,21 @@
   <style>
     html {
       scroll-behavior: smooth;
-      background-color: #09090b;
-      color: #fafafa;
+      background-color: #060911;
+      color: #f8fafc;
     }
     body {
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    .glass-card {
-      background: rgba(18, 18, 22, 0.72);
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.72);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
     }
-    .story-beat {
+    .callout-card {
       transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
@@ -46,666 +46,1050 @@
       width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #09090b;
+      background: #060911;
     }
     ::-webkit-scrollbar-thumb {
-      background: #27272a;
+      background: #1e293b;
       border-radius: 999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #3f3f46;
+      background: #334155;
     }
   </style>
 </head>
-<body class="bg-zinc-950 text-zinc-50 selection:bg-sky-500 selection:text-white">
+<body class="bg-[#060911] text-slate-50 selection:bg-sky-500 selection:text-slate-950">
 
-  <!-- Barra di navigazione superiore fissa -->
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-zinc-950/75 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-zinc-950 font-extrabold shadow-lg shadow-sky-500/20">
-          VC
+  <!-- NAVBAR FISSA -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#060911]/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8">
+      <a href="#" class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 via-cyan-400 to-blue-600 text-slate-950 font-black text-base shadow-lg shadow-sky-500/25">
+          M2
         </div>
         <div>
-          <span class="font-bold tracking-tight text-white text-lg">Veloce<span class="text-sky-400">Cargo</span></span>
-          <span class="hidden sm:inline-block ml-2 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-zinc-400">
-            Sequence 120 FPS
-          </span>
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-extrabold tracking-tight text-white">Meteo<span class="text-sky-400">2</span></span>
+            <span class="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              Live System
+            </span>
+          </div>
+          <p class="hidden md:block text-[11px] text-slate-400">Previsioni Meteo • Telecamere & Webcam 4K • App</p>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-        <a href="#scrolly-stage" class="hover:text-white transition-colors">Esplora 360°</a>
-        <a href="#specifiche" class="hover:text-white transition-colors">Specifiche</a>
-        <a href="#contatti" class="hover:text-white transition-colors">Preventivo</a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
+        <a href="#montaggio-scroll" class="hover:text-sky-400 transition-colors">Installazione 4K</a>
+        <a href="#sviluppo" class="hover:text-sky-400 transition-colors">Sviluppo</a>
+        <a href="#montaggio" class="hover:text-sky-400 transition-colors">Montaggio</a>
+        <a href="#post-montaggio" class="hover:text-sky-400 transition-colors">Post Montaggio</a>
+        <a href="#costi" class="hover:text-sky-400 transition-colors">Costi</a>
+        <a href="#galleria-contatti" class="hover:text-sky-400 transition-colors">Galleria & Contatti</a>
       </nav>
 
-      <a href="#contatti" class="rounded-full bg-white px-4 py-2 text-xs font-semibold text-zinc-950 hover:bg-sky-400 hover:text-zinc-950 transition-all shadow-md">
-        Prenota Ritiro
-      </a>
+      <div class="flex items-center gap-2.5">
+        <a href="#app-meteo2" class="hidden sm:inline-flex items-center rounded-xl border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-semibold text-white hover:bg-white/10 transition-all">
+          App Meteo 2
+        </a>
+        <a href="#galleria-contatti" class="rounded-xl bg-sky-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20">
+          Richiedi Info
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- SEZIONE PRINCIPALE: IMMAGINE / SEQUENZA 3D GUIDATA DALLO SCROLL -->
-  <section id="scrolly-stage" class="relative h-[480vh] w-full">
-    <!-- Contenitore Sticky a schermo intero -->
-    <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-zinc-950">
-      
-      <!-- Bagliore ambientale di sfondo -->
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(56,189,248,0.13),transparent_62%)]"></div>
+  <!-- 1. SCHERMATA PRINCIPALE (HERO) DINAMICA + BOX APP METEO 2 -->
+  <section id="app-meteo2" class="relative min-h-screen pt-24 pb-16 flex items-center overflow-hidden">
+    <!-- Canvas sfondo dinamico (nuvole timelapse / radar + simulazione telecamera live) -->
+    <canvas id="hero-canvas" class="pointer-events-none absolute inset-0 h-full w-full opacity-80"></canvas>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#060911]/70 via-[#060911]/45 to-[#060911]"></div>
 
-      <!-- Canvas ad alta risoluzione per il rendering fluido dei fotogrammi -->
-      <canvas id="sequence-canvas" class="h-full w-full block"></canvas>
+    <div class="relative z-10 mx-auto max-w-7xl w-full px-5 sm:px-8 grid gap-12 lg:grid-cols-12 items-center">
+      <!-- Colonna sinistra: Titolo, Dati Live Overlay & Box App Meteo 2 -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex flex-wrap items-center gap-2.5 rounded-full border border-sky-400/30 bg-slate-950/75 px-4 py-1.5 text-xs font-mono text-sky-300 backdrop-blur-md">
+          <span class="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
+          <span>CAM-01 • VALLE ALPINA & COSTA</span>
+          <span class="text-slate-500">|</span>
+          <span id="hero-clock" class="text-white font-semibold">--:--:--</span>
+          <span class="text-slate-500">|</span>
+          <span id="hero-weather-badge" class="text-emerald-300">14.2°C • Vento 18 km/h NE</span>
+        </div>
 
-      <!-- OVERLAY TESTUALI SINCRONIZZATI CON LO SCROLL -->
-      
-      <!-- Fase 1 (0% - 24%): Vista Frontale -->
-      <div id="beat-0" class="story-beat pointer-events-none absolute inset-x-0 top-24 md:top-28 flex flex-col items-center text-center px-6">
-        <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-sky-300">
-          <span class="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
-          Scorri per animare il veicolo
-        </span>
-        <h1 class="max-w-3xl text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
-          Ogni movimento, <br class="hidden sm:inline" />
-          <span class="bg-gradient-to-r from-sky-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">sotto il tuo controllo.</span>
+        <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black tracking-tight text-white leading-[1.06]">
+          Previsioni meteo, <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-sky-300 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
+            installazione telecamere
+          </span>
+          <br />e webcam live.
         </h1>
-        <p class="mt-4 max-w-xl text-sm sm:text-base text-zinc-400">
-          Scorri verso il basso: il furgone ruota a 360°, apre i portelloni posteriori e mostra l’interno in tempo reale.
+
+        <p class="max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed">
+          Progettiamo, montiamo e gestiamo stazioni meteo, telecamere professionali e webcam in alta definizione per sicurezza, controllo territorio, cantieri, impianti sciistici e strutture turistiche — sempre connessi con l’App <strong class="text-white">Meteo 2</strong>.
         </p>
-      </div>
 
-      <!-- Fase 2 (26% - 50%): Profilo Laterale 3/4 -->
-      <div id="beat-1" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute left-6 right-6 md:left-14 md:right-auto bottom-24 md:bottom-auto md:top-1/2 md:-translate-y-1/2 max-w-md">
-        <div class="glass-card rounded-2xl p-6 sm:p-7">
-          <div class="flex items-center justify-between text-xs font-mono text-sky-400 mb-2">
-            <span>FASE 01 // AERODINAMICA</span>
-            <span>360° VIEW</span>
-          </div>
-          <h2 class="text-2xl font-bold text-white tracking-tight">Design compatto, capacità massima</h2>
-          <p class="mt-2.5 text-sm leading-relaxed text-zinc-300">
-            Telaio ribassato per carico rapido in centro città e autonomia estesa fino a 420 km con singola ricarica.
-          </p>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 text-xs">
-            <div>
-              <span class="text-zinc-500 block">Volume utile</span>
-              <span class="font-semibold text-white text-sm">11,5 m³</span>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a href="#montaggio-scroll" class="rounded-xl bg-sky-400 px-6 py-3.5 text-sm font-bold text-slate-950 hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/25">
+            Guarda il Montaggio 4K allo Scroll
+          </a>
+          <a href="#costi" class="rounded-xl border border-white/15 bg-slate-900/75 px-6 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 transition-all backdrop-blur-md">
+            Scopri i Pacchetti e Costi
+          </a>
+        </div>
+
+        <!-- Box in evidenza App Meteo 2 -->
+        <div class="glass-panel rounded-2xl p-5 sm:p-6 mt-4 border border-sky-400/25">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="rounded-md bg-sky-400/20 px-2 py-0.5 text-[11px] font-mono font-bold uppercase text-sky-300">
+                  App Ufficiale
+                </span>
+                <h2 class="text-lg font-bold text-white">Scarica l’App Meteo 2</h2>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300">
+                Controlla webcam live, timelapse giornalieri, radar e previsioni locali ovunque ti trovi.
+              </p>
             </div>
-            <div>
-              <span class="text-zinc-500 block">Portata massima</span>
-              <span class="font-semibold text-white text-sm">1.450 kg</span>
+
+            <div class="flex flex-wrap sm:flex-nowrap gap-3 shrink-0">
+              <!-- Pulsante App Store -->
+              <a href="#galleria-contatti" class="flex items-center gap-2.5 rounded-xl bg-white px-4 py-2.5 text-slate-950 hover:bg-sky-100 transition-all shadow-md">
+                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/>
+                </svg>
+                <div class="text-left leading-tight">
+                  <span class="block text-[9px] font-semibold uppercase tracking-wider opacity-75">Scarica su</span>
+                  <span class="block text-xs font-extrabold">App Store</span>
+                </div>
+              </a>
+
+              <!-- Pulsante Google Play -->
+              <a href="#galleria-contatti" class="flex items-center gap-2.5 rounded-xl border border-white/20 bg-slate-950/90 px-4 py-2.5 text-white hover:border-sky-400 transition-all">
+                <svg class="h-5 w-5 fill-current text-sky-400" viewBox="0 0 24 24">
+                  <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/>
+                </svg>
+                <div class="text-left leading-tight">
+                  <span class="block text-[9px] font-semibold uppercase tracking-wider text-slate-400">Disponibile su</span>
+                  <span class="block text-xs font-extrabold">Google Play</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Fase 3 (52% - 78%): Apertura Portelloni & Carico -->
-      <div id="beat-2" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute left-6 right-6 md:left-auto md:right-14 bottom-24 md:bottom-auto md:top-1/2 md:-translate-y-1/2 max-w-md">
-        <div class="glass-card rounded-2xl p-6 sm:p-7">
-          <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-2">
-            <span>FASE 02 // VANO DI CARICO</span>
-            <span>APERTURA 270°</span>
+      <!-- Colonna destra: Anteprima Smartphone con App Meteo 2 in funzione -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative w-[300px] sm:w-[320px] rounded-[2.6rem] border-[6px] border-slate-800 bg-slate-950 p-3 shadow-2xl shadow-sky-950/60">
+          <!-- Tacca superiore -->
+          <div class="mx-auto mb-2.5 h-4 w-28 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center">
+            <span class="h-1.5 w-1.5 rounded-full bg-sky-400/70"></span>
           </div>
-          <h2 class="text-2xl font-bold text-white tracking-tight">Accesso posteriore intelligente</h2>
-          <p class="mt-2.5 text-sm leading-relaxed text-zinc-300">
-            Sensori di peso integrati su ogni scaffale, illuminazione LED automatica e blocchi di sicurezza anti-urto per ogni collo.
+
+          <!-- Schermo App Meteo 2 -->
+          <div class="rounded-[2rem] bg-gradient-to-b from-slate-900 via-[#0b1324] to-slate-950 p-4 border border-white/10 space-y-3.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-sky-400">App Meteo 2</span>
+                <h3 class="text-sm font-bold text-white">Passo Dolomiti • Cam 4K</h3>
+              </div>
+              <span class="rounded-full bg-rose-500/20 border border-rose-500/40 px-2 py-0.5 text-[10px] font-mono font-bold text-rose-300">
+                ● LIVE
+              </span>
+            </div>
+
+            <!-- Mini anteprima live stream dentro lo smartphone -->
+            <div class="relative h-32 w-full overflow-hidden rounded-xl border border-white/10 bg-gradient-to-tr from-sky-950 via-cyan-900/60 to-slate-900 p-2.5 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[10px] font-mono text-white/90 bg-slate-950/60 rounded px-2 py-0.5">
+                <span>4K UHD • 30fps</span>
+                <span id="phone-time">10:19:42</span>
+              </div>
+              <!-- Sagoma montagne & stazione -->
+              <svg viewBox="0 0 240 70" class="w-full h-14 opacity-90">
+                <path d="M0 70 L55 24 L95 52 L145 14 L205 56 L240 34 L240 70 Z" fill="rgba(15,23,42,0.85)" />
+                <path d="M145 14 L158 24 L134 28 Z" fill="rgba(248,250,252,0.75)" />
+              </svg>
+              <div class="flex items-center justify-between text-[10px] font-mono text-sky-200 bg-slate-950/65 rounded px-2 py-0.5">
+                <span>+6.4°C • Sereno</span>
+                <span>Vento 12 km/h</span>
+              </div>
+            </div>
+
+            <!-- Dati Meteo Sintesi -->
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="rounded-xl bg-white/5 border border-white/10 p-2">
+                <span class="block text-[10px] text-slate-400">Temp</span>
+                <span class="text-sm font-bold text-white">+6.4°</span>
+              </div>
+              <div class="rounded-xl bg-white/5 border border-white/10 p-2">
+                <span class="block text-[10px] text-slate-400">Vento</span>
+                <span class="text-sm font-bold text-sky-300">12 km/h</span>
+              </div>
+              <div class="rounded-xl bg-white/5 border border-white/10 p-2">
+                <span class="block text-[10px] text-slate-400">Umidità</span>
+                <span class="text-sm font-bold text-emerald-300">58%</span>
+              </div>
+            </div>
+
+            <!-- Previsione ore successive -->
+            <div class="rounded-xl bg-white/5 border border-white/10 p-2.5 space-y-1.5 text-[11px]">
+              <div class="flex justify-between text-slate-300">
+                <span class="font-mono">12:00</span>
+                <span>Soleggiato / Velature</span>
+                <span class="font-bold text-white">+9°</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span class="font-mono">15:00</span>
+                <span>Brezza moderata</span>
+                <span class="font-bold text-white">+8°</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span class="font-mono">18:00</span>
+                <span>Timelaps pronto</span>
+                <span class="font-bold text-sky-300">+4°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SEZIONE A SCORRIMENTO: PARETE VUOTA -> COMPARSA TELECAMERA 4K + DESCRIZIONI -->
+  <section id="montaggio-scroll" class="relative h-[420vh] w-full border-t border-white/10">
+    <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#070b14]">
+
+      <!-- Canvas parete vuota e comparsa progressiva telecamera -->
+      <canvas id="wall-cam-canvas" class="h-full w-full block"></canvas>
+
+      <!-- Intestazione in alto -->
+      <div class="pointer-events-none absolute top-20 inset-x-0 text-center px-5 z-20">
+        <span class="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-slate-950/80 px-3.5 py-1 text-xs font-mono uppercase tracking-widest text-sky-300">
+          Scorri per vedere l’installazione sul muro
+        </span>
+        <h2 class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+          Dalla parete vuota alla <span class="text-sky-400">telecamera 4K operativa</span>
+        </h2>
+      </div>
+
+      <!-- Callout 1: Braccio forte fissa a muro (visibile 15% - 45%) -->
+      <div id="wall-beat-1" class="callout-card pointer-events-none opacity-0 translate-y-6 absolute left-5 right-5 sm:left-12 sm:right-auto bottom-24 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 max-w-sm z-20">
+        <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-sky-400">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-sky-400">01 • Ancoraggio Strutturale</span>
+          <h3 class="mt-1 text-xl font-bold text-white">Braccio forte fissa a muro</h3>
+          <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Staffa rinforzata in acciaio trattato anti-corrosione, fissaggio ad alta tenuta su muratura, cemento o strutture metalliche e passaggio cavo protetto contro vento e intemperie.
           </p>
-          <ul class="mt-4 space-y-2 border-t border-white/10 pt-4 text-xs text-zinc-300">
-            <li class="flex items-center gap-2">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-              Tracciamento GPS e temperatura in tempo reale
-            </li>
-            <li class="flex items-center gap-2">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-              Soglia di carico ribassata a 52 cm da terra
-            </li>
-          </ul>
         </div>
       </div>
 
-      <!-- Fase 4 (80% - 100%): Chiusura e Partenza -->
-      <div id="beat-3" class="story-beat pointer-events-none opacity-0 translate-y-6 absolute inset-x-0 bottom-24 flex flex-col items-center text-center px-6">
-        <div class="glass-card rounded-2xl px-7 py-6 max-w-lg pointer-events-auto">
-          <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Pronto a partire</span>
-          <h2 class="mt-1 text-2xl sm:text-3xl font-bold text-white">Consegne puntuali, zero pensieri.</h2>
-          <p class="mt-2 text-sm text-zinc-300">
-            Pianifica la tua spedizione in meno di 60 secondi con tariffe trasparenti.
+      <!-- Callout 2: Qualità 4K (visibile 46% - 75%) -->
+      <div id="wall-beat-2" class="callout-card pointer-events-none opacity-0 translate-y-6 absolute left-5 right-5 sm:left-auto sm:right-12 bottom-24 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 max-w-sm z-20">
+        <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-emerald-400">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-emerald-400">02 • Ottica Professionale</span>
+          <h3 class="mt-1 text-xl font-bold text-white">Qualità 4K Ultra HD</h3>
+          <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Sensore ad alta risoluzione per panorami nitidi giorno e notte, lettura dettagliata di cantieri, piste, coste o aree sensibili e generazione automatica di timelapse.
           </p>
-          <div class="mt-5 flex flex-wrap justify-center gap-3">
-            <a href="#contatti" class="rounded-xl bg-sky-400 px-5 py-2.5 text-sm font-semibold text-zinc-950 hover:bg-sky-300 transition-colors">
-              Calcola Preventivo
-            </a>
-            <a href="#specifiche" class="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors">
-              Scopri i Dettagli
-            </a>
-          </div>
         </div>
       </div>
 
-      <!-- Indicatore HUD Frame & Progresso in basso -->
-      <div class="pointer-events-none absolute bottom-6 inset-x-6 md:inset-x-14 flex items-center justify-between text-xs font-mono text-zinc-400">
-        <div class="flex items-center gap-3">
-          <span id="frame-counter" class="text-white font-semibold">FRAME 001 / 120</span>
-          <span id="phase-label" class="hidden sm:inline text-zinc-500">— VISTA FRONTALE</span>
+      <!-- Callout 3: Connessione & Live su Meteo 2 (visibile 76% - 100%) -->
+      <div id="wall-beat-3" class="callout-card pointer-events-none opacity-0 translate-y-6 absolute inset-x-5 bottom-20 flex justify-center z-20">
+        <div class="glass-panel rounded-2xl px-6 py-4 max-w-xl text-center border border-sky-400/30">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-sky-300">03 • Pronta all’uso</span>
+          <h3 class="mt-0.5 text-lg sm:text-xl font-bold text-white">
+            Flusso Live su Sito e App Meteo 2 + Dati Meteo in Sovraimpressione
+          </h3>
+          <p class="mt-1 text-xs sm:text-sm text-slate-300">
+            Collegamento 4G/5G, Wi-Fi o ponte radio con alimentazione da rete o pannello solare autonomo.
+          </p>
         </div>
+      </div>
+
+      <!-- Barra stato scorrimento -->
+      <div class="pointer-events-none absolute bottom-5 inset-x-5 sm:inset-x-12 flex items-center justify-between text-xs font-mono text-slate-400 z-20">
+        <span id="wall-step-label" class="text-white font-semibold">FASE: PARETE VUOTA</span>
         <div class="flex items-center gap-3">
           <div class="h-1.5 w-28 sm:w-44 overflow-hidden rounded-full bg-white/10">
-            <div id="scroll-progress-bar" class="h-full w-0 bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-75"></div>
+            <div id="wall-progress-bar" class="h-full w-0 bg-gradient-to-r from-sky-400 to-emerald-400"></div>
           </div>
-          <span id="percent-counter">0%</span>
+          <span id="wall-percent">0%</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SEZIONE SPECIFICHE PULITE -->
-  <section id="specifiche" class="relative z-10 border-t border-white/10 bg-zinc-950 py-24 px-6">
-    <div class="mx-auto max-w-6xl">
-      <div class="max-w-2xl">
-        <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Tecnologia & Flotta</span>
-        <h2 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-white">Progettato per la logistica moderna.</h2>
-        <p class="mt-3 text-zinc-400">Unendo velocità operativa, monitoraggio costante e mezzi a basse emissioni.</p>
+  <!-- 3. LE 4 SEZIONI PRINCIPALI: SVILUPPO, MONTAGGIO, POST MONTAGGIO, COSTI -->
+  <section id="sviluppo" class="border-t border-white/10 bg-[#060911] py-24 px-5 sm:px-8">
+    <div class="mx-auto max-w-7xl space-y-24">
+
+      <!-- Sezione A: Sviluppo -->
+      <div class="grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5 space-y-3">
+          <span class="text-xs font-mono font-bold uppercase tracking-widest text-sky-400">01 / Sviluppo</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Sopralluogo, rete e progettazione su misura
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Ogni luogo ha esigenze diverse: analizziamo angoli visivi, condizioni climatiche e connettività prima di posare un solo cavo.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid gap-5 sm:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Sopralluogo tecnico e inquadratura</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Valutazione del punto di installazione per massimizzare il campo visivo, evitare controluce o ostacoli e proteggere l’hardware.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Studio copertura 4G/5G, Wi-Fi e ponte radio</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Test di segnale in loco e progettazione di connessioni stabili anche in quota, zone montane, cantieri o aree rurali.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 sm:col-span-2">
+            <h3 class="font-bold text-white text-base">Progettazione postazioni meteo & sistemi di sorveglianza</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Soluzioni dedicate per monitoraggio meteo/panoramico, sicurezza perimetrale, controllo territorio, cantieri edili, impianti sciistici e strutture turistiche (hotel, rifugi, stabilimenti).
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 font-mono font-bold">01</div>
-          <h3 class="text-lg font-semibold text-white">Consegna Espressa 24h</h3>
-          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Ritiro diretto presso la tua sede e consegna garantita entro 24 ore su tutto il territorio nazionale.</p>
+      <!-- Sezione B: Montaggio -->
+      <div id="montaggio" class="border-t border-white/10 pt-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5 space-y-3">
+          <span class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400">02 / Montaggio</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Installazione solida in ogni condizione
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Eseguiamo l’installazione fisica sul posto con componenti professionali progettati per durare negli anni.
+          </p>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 font-mono font-bold">02</div>
-          <h3 class="text-lg font-semibold text-white">Tracking Live al Metro</h3>
-          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Link diretto condivisibile con il destinatario per seguire il furgone sulla mappa minuto per minuto.</p>
-        </div>
-        <div class="rounded-2xl border border-white/10 bg-zinc-900/50 p-7 hover:border-sky-400/40 transition-colors">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 font-mono font-bold">03</div>
-          <h3 class="text-lg font-semibold text-white">Carico Assicurato 100%</h3>
-          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Copertura completa inclusa su ogni spedizione, con verifica fotografica digitale alla consegna.</p>
+        <div class="lg:col-span-7 grid gap-5 sm:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Telecamere IP, webcam HD/4K e stazioni meteo</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Posa di telecamere 4K, webcam panoramiche, pali, bracci rinforzati, staffe e sensori meteorologici certificati.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Alimentazione elettrica o pannelli solari</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Collegamento a rete elettrica oppure sistemi fotovoltaici con batterie per garantire continuità anche in zone isolate senza corrente.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 sm:col-span-2">
+            <h3 class="font-bold text-white text-base">Cablaggio protetto e messa in sicurezza</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Canalizzazioni stagne, protezioni contro sovratensioni e collaudo completo sul campo prima della consegna.
+            </p>
+          </div>
         </div>
       </div>
+
+      <!-- Sezione C: Post Montaggio -->
+      <div id="post-montaggio" class="border-t border-white/10 pt-20 grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5 space-y-3">
+          <span class="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400">03 / Post Montaggio</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Stream live, App Meteo 2 e assistenza continua
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Il lavoro non finisce con il fissaggio: rendiamo il flusso video e i dati meteo subito fruibili e sempre monitorati.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid gap-5 sm:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Configurazione live, sito e App Meteo 2</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Attivazione del flusso video in tempo reale, integrazione sul tuo sito web e pubblicazione sull’App <strong class="text-white">Meteo 2</strong>.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+            <h3 class="font-bold text-white text-base">Timelapse e overlay dati meteo</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Creazione automatica di video timelapse giornalieri/stagionali e sovraimpressione di ora, temperatura, vento e condizioni meteo.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 sm:col-span-2">
+            <h3 class="font-bold text-white text-base">Manutenzione e assistenza tecnica da remoto</h3>
+            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              Diagnostica remota, aggiornamenti, monitoraggio uptime e supporto tecnico dedicato per mantenere ogni postazione sempre efficiente.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sezione D: Costi (3 Pacchetti + Preventivo Interattivo) -->
+      <div id="costi" class="border-t border-white/10 pt-20 space-y-12">
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-mono font-bold uppercase tracking-widest text-amber-400">04 / Costi</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Pacchetti trasparenti e preventivo su misura
+          </h2>
+          <p class="text-sm sm:text-base text-slate-400">
+            Valori indicativi calibrati sul tipo di struttura e connettività richiesta.
+          </p>
+        </div>
+
+        <!-- 3 Pacchetti -->
+        <div class="grid gap-6 lg:grid-cols-3">
+          <!-- Base -->
+          <div class="rounded-3xl border border-white/10 bg-slate-900/50 p-7 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Pacchetto Base</span>
+              <h3 class="mt-1 text-2xl font-bold text-white">Webcam Panoramica</h3>
+              <p class="mt-2 text-xs text-slate-400">Ideale per piccole attività, B&B o punti panoramici con rete esistente.</p>
+              <div class="mt-5 flex items-baseline gap-1">
+                <span class="text-3xl font-black text-white">da € 890</span>
+                <span class="text-xs text-slate-400">/ impianto</span>
+              </div>
+              <ul class="mt-6 space-y-2.5 text-sm text-slate-300 border-t border-white/10 pt-5">
+                <li>• 1 Webcam HD/4K con braccio a muro</li>
+                <li>• Configurazione flusso live e overlay base</li>
+                <li>• Integrazione sito e App Meteo 2</li>
+                <li>• Supporto remoto standard</li>
+              </ul>
+            </div>
+            <button type="button" onclick="selectPackage('Base - Webcam Panoramica')" class="mt-7 w-full rounded-xl border border-white/15 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+              Seleziona Base
+            </button>
+          </div>
+
+          <!-- Pro (Evidenziato) -->
+          <div class="rounded-3xl border-2 border-sky-400/70 bg-slate-900/80 p-7 flex flex-col justify-between shadow-xl shadow-sky-950/40">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold">Pacchetto Pro</span>
+                <span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[10px] font-mono font-bold text-sky-300">AZIENDE & HOTEL</span>
+              </div>
+              <h3 class="mt-1 text-2xl font-bold text-white">4K + Dati Meteo & 4G</h3>
+              <p class="mt-2 text-xs text-slate-300">Perfetto per hotel, cantieri, strutture turistiche e monitoraggio meteo locale.</p>
+              <div class="mt-5 flex items-baseline gap-1">
+                <span class="text-3xl font-black text-white">da € 1.690</span>
+                <span class="text-xs text-slate-400">/ impianto</span>
+              </div>
+              <ul class="mt-6 space-y-2.5 text-sm text-slate-200 border-t border-white/10 pt-5">
+                <li>• Telecamera 4K professionale + braccio rinforzato</li>
+                <li>• Connessione 4G/5G dedicata + sensori meteo</li>
+                <li>• Timelapse automatico e App Meteo 2</li>
+                <li>• Manutenzione preventiva e assistenza remota</li>
+              </ul>
+            </div>
+            <button type="button" onclick="selectPackage('Pro - 4K + Dati Meteo & 4G')" class="mt-7 w-full rounded-xl bg-sky-400 py-3 text-sm font-bold text-slate-950 hover:bg-sky-300 transition-colors">
+              Seleziona Pro
+            </button>
+          </div>
+
+          <!-- Custom -->
+          <div class="rounded-3xl border border-white/10 bg-slate-900/50 p-7 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-amber-400">Pacchetto Custom</span>
+              <h3 class="mt-1 text-2xl font-bold text-white">Enti, Impianti & Solare</h3>
+              <p class="mt-2 text-xs text-slate-400">Progetti multi-camera, impianti sciistici, controllo territorio e zone off-grid.</p>
+              <div class="mt-5 flex items-baseline gap-1">
+                <span class="text-3xl font-black text-white">Su misura</span>
+                <span class="text-xs text-slate-400">/ progetto</span>
+              </div>
+              <ul class="mt-6 space-y-2.5 text-sm text-slate-300 border-t border-white/10 pt-5">
+                <li>• Multi-telecamera 4K, pali e ponti radio</li>
+                <li>• Kit pannello solare autonomo + batterie</li>
+                <li>• Stazione meteo completa e dashboard dedicata</li>
+                <li>• SLA assistenza e sopralluogo tecnico</li>
+              </ul>
+            </div>
+            <button type="button" onclick="selectPackage('Custom - Enti, Impianti & Solare')" class="mt-7 w-full rounded-xl border border-white/15 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+              Richiedi Custom
+            </button>
+          </div>
+        </div>
+
+        <!-- Preventivo Interattivo Rapido -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-10">
+          <div class="grid gap-8 lg:grid-cols-12 items-center">
+            <div class="lg:col-span-5 space-y-3">
+              <span class="text-xs font-mono uppercase tracking-wider text-sky-400">Preventivo Interattivo</span>
+              <h3 class="text-2xl font-bold text-white">Calcola una stima indicativa</h3>
+              <p class="text-sm text-slate-300">
+                Scegli numero di telecamere, alimentazione e connettività per vedere una stima orientativa immediata.
+              </p>
+              <div class="rounded-2xl border border-sky-400/25 bg-slate-950/80 p-5 mt-4">
+                <span class="text-xs font-mono text-slate-400 block">Stima indicativa chiavi in mano</span>
+                <span id="estimate-output" class="text-3xl font-black text-sky-400">€ 1.690</span>
+                <p id="estimate-note" class="mt-1 text-xs text-slate-400">1 camera 4K • Alimentazione rete • 4G/5G</p>
+              </div>
+            </div>
+
+            <div class="lg:col-span-7 grid gap-4 sm:grid-cols-2">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">Numero Telecamere / Webcam</label>
+                <select id="calc-cams" onchange="calcEstimate()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+                  <option value="1" selected>1 Telecamera / Webcam</option>
+                  <option value="2">2 Telecamere / Webcam</option>
+                  <option value="4">4 Telecamere / Webcam</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">Alimentazione</label>
+                <select id="calc-power" onchange="calcEstimate()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+                  <option value="0" selected>Corrente elettrica esistente</option>
+                  <option value="650">Pannello solare autonomo (+€ 650)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">Connettività</label>
+                <select id="calc-net" onchange="calcEstimate()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+                  <option value="0">Rete Wi-Fi / LAN già presente</option>
+                  <option value="350" selected>Router 4G/5G dedicato (+€ 350)</option>
+                  <option value="850">Ponte radio / area remota (+€ 850)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">Sensori Meteo & Timelapse</label>
+                <select id="calc-meteo" onchange="calcEstimate()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+                  <option value="0">Solo flusso video & timelapse</option>
+                  <option value="450" selected>Dati meteo locali + overlay (+€ 450)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- SEZIONE PREVENTIVO -->
-  <section id="contatti" class="relative z-10 border-t border-white/10 bg-zinc-900/40 py-24 px-6">
-    <div class="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-zinc-900/80 p-8 sm:p-12 shadow-2xl">
-      <div class="text-center">
-        <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Preventivo Rapido</span>
-        <h2 class="mt-2 text-3xl font-bold text-white">Organizza la tua spedizione</h2>
-        <p class="mt-2 text-sm text-zinc-400">Compila i campi qui sotto per ricevere una quotazione immediata.</p>
+  <!-- 4. GALLERIA ESEMPI INSTALLATI + CONTATTI WHATSAPP / EMAIL -->
+  <section id="galleria-contatti" class="border-t border-white/10 bg-slate-950/70 py-24 px-5 sm:px-8">
+    <div class="mx-auto max-w-7xl space-y-20">
+
+      <!-- Galleria Esempi -->
+      <div class="space-y-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Galleria & Demo</span>
+            <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+              Esempi di webcam e telecamere installate
+            </h2>
+          </div>
+          <p class="text-sm text-slate-400 max-w-md">
+            Anteprime illustrative di postazioni attive su impianti, cantieri e panorami.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Card 1 -->
+          <div class="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60">
+            <div class="relative h-48 bg-gradient-to-tr from-sky-950 via-blue-900/70 to-slate-800 p-4 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="rounded bg-slate-950/75 px-2 py-0.5 text-sky-300">IMPIANTI SCIISTICI • 4K</span>
+                <span class="rounded bg-emerald-500/20 border border-emerald-400/40 px-2 py-0.5 text-emerald-300">LIVE</span>
+              </div>
+              <div class="rounded-lg bg-slate-950/75 px-3 py-1.5 text-xs font-mono text-white flex justify-between">
+                <span>+3°C • Neve compatta</span>
+                <span>Vento 14 km/h</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-white text-base">Quota 1.950m — Pista & Rifugio</h3>
+              <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">
+                Telecamera 4K su braccio rinforzato, alimentazione solare e trasmissione 4G con pubblicazione su App Meteo 2.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60">
+            <div class="relative h-48 bg-gradient-to-tr from-amber-950/80 via-slate-800 to-slate-900 p-4 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="rounded bg-slate-950/75 px-2 py-0.5 text-amber-300">CANTIERE & SICUREZZA</span>
+                <span class="rounded bg-sky-500/20 border border-sky-400/40 px-2 py-0.5 text-sky-300">TIMELAPSE</span>
+              </div>
+              <div class="rounded-lg bg-slate-950/75 px-3 py-1.5 text-xs font-mono text-white flex justify-between">
+                <span>+18°C • Sereno</span>
+                <span>Registro giornaliero</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-white text-base">Controllo Cantiere & Avanzamento</h3>
+              <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">
+                Monitoraggio perimetrale e archiviazione timelapse per seguire l’avanzamento lavori da remoto.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60">
+            <div class="relative h-48 bg-gradient-to-tr from-cyan-950 via-teal-900/60 to-slate-900 p-4 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="rounded bg-slate-950/75 px-2 py-0.5 text-cyan-300">TURISMO & COSTA</span>
+                <span class="rounded bg-emerald-500/20 border border-emerald-400/40 px-2 py-0.5 text-emerald-300">LIVE</span>
+              </div>
+              <div class="rounded-lg bg-slate-950/75 px-3 py-1.5 text-xs font-mono text-white flex justify-between">
+                <span>+22°C • Mare calmo</span>
+                <span>Brezza 9 km/h</span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-white text-base">Hotel & Lungomare Panoramico</h3>
+              <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">
+                Webcam panoramica ad alta visibilità integrata sul sito della struttura ricettiva e sull’App Meteo 2.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form id="quote-form" class="mt-8 space-y-5">
-        <div class="grid gap-5 sm:grid-cols-2">
-          <div>
-            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Città di Ritiro</label>
-            <input type="text" required placeholder="Es. Milano" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Città di Consegna</label>
-            <input type="text" required placeholder="Es. Roma" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
-          </div>
-        </div>
-        <div class="grid gap-5 sm:grid-cols-2">
-          <div>
-            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Tipologia Carico</label>
-            <select class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
-              <option>Pacchi / Colli singoli</option>
-              <option>Bancali / Pallet (1–4)</option>
-              <option>Furgone dedicato completo</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-medium text-zinc-400 mb-1.5">Email aziendale o telefono</label>
-            <input type="text" required placeholder="nome@azienda.it" class="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-sky-400 focus:outline-none" />
+      <!-- Contatti Diretti: WhatsApp & Email -->
+      <div class="grid gap-8 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">Contatti Diretti</span>
+          <h2 class="text-3xl font-extrabold tracking-tight text-white">Parla con il team Meteo2</h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Hai bisogno di un sopralluogo, una webcam panoramica o un sistema di telecamere 4K? Scrivici subito su WhatsApp o invia una richiesta via email.
+          </p>
+
+          <div class="flex flex-col sm:flex-row lg:flex-col gap-3 pt-2">
+            <!-- Sostituisci 393330000000 con il tuo numero WhatsApp reale -->
+            <a href="https://wa.me/393330000000?text=Ciao%20Meteo2%2C%20vorrei%20informazioni%20su%20telecamere%204K%20e%20stazioni%20meteo." target="_blank" rel="noopener"
+               class="flex items-center justify-center gap-2.5 rounded-xl bg-emerald-500 px-5 py-3.5 text-sm font-bold text-slate-950 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20">
+              <span>Scrivi su WhatsApp</span>
+            </a>
+
+            <a href="mailto:info@meteo2.it?subject=Richiesta%20Informazioni%20Meteo2"
+               class="flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-slate-900 px-5 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 transition-all">
+              <span>Invia Email a info@meteo2.it</span>
+            </a>
           </div>
         </div>
-        <button type="submit" class="w-full rounded-xl bg-sky-400 py-3.5 text-sm font-bold text-zinc-950 hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20">
-          Invia Richiesta
-        </button>
-        <p id="form-feedback" class="hidden text-center text-sm font-medium text-emerald-400 pt-2">
-          Richiesta inviata! Ti risponderemo entro 15 minuti.
-        </p>
-      </form>
+
+        <form id="contact-form" class="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 space-y-4">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1.5">Nome / Azienda o Ente</label>
+              <input type="text" required placeholder="Es. Rifugio Alpino / Hotel Mare" class="w-full rounded-xl border border-white/15 bg-slate-950/90 px-4 py-3 text-sm text-white placeholder-slate-600 focus:border-sky-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1.5">Email o Telefono</label>
+              <input type="text" required placeholder="nome@dominio.it" class="w-full rounded-xl border border-white/15 bg-slate-950/90 px-4 py-3 text-sm text-white placeholder-slate-600 focus:border-sky-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1.5">Pacchetto di interesse</label>
+              <select id="form-package" class="w-full rounded-xl border border-white/15 bg-slate-950/90 px-4 py-3 text-sm text-white focus:border-sky-400 focus:outline-none">
+                <option>Base - Webcam Panoramica</option>
+                <option selected>Pro - 4K + Dati Meteo & 4G</option>
+                <option>Custom - Enti, Impianti & Solare</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1.5">Località / Contesto</label>
+              <input type="text" placeholder="Es. Montagna, Cantiere, Struttura turistica" class="w-full rounded-xl border border-white/15 bg-slate-950/90 px-4 py-3 text-sm text-white placeholder-slate-600 focus:border-sky-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Dettagli della richiesta</label>
+            <textarea rows="3" placeholder="Raccontaci cosa vuoi monitorare, se serve pannello solare o collegamento 4G/5G..." class="w-full rounded-xl border border-white/15 bg-slate-950/90 px-4 py-3 text-sm text-white placeholder-slate-600 focus:border-sky-400 focus:outline-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full rounded-xl bg-sky-400 py-3.5 text-sm font-bold text-slate-950 hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20">
+            Invia Richiesta a Meteo2
+          </button>
+
+          <p id="contact-feedback" class="hidden text-center text-sm font-semibold text-emerald-400 pt-1">
+            Richiesta registrata! Ti ricontatteremo al più presto.
+          </p>
+        </form>
+      </div>
+
     </div>
   </section>
 
-  <footer class="border-t border-white/10 bg-zinc-950 py-10 px-6 text-center text-xs text-zinc-500">
-    <p>© 2026 VeloceCargo — Tutti i diritti riservati.</p>
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-[#060911] py-8 px-5 text-center text-xs text-slate-500">
+    <p>© 2026 <strong class="text-slate-300">Meteo2</strong> — Previsioni Meteo, Telecamere 4K, Webcam Live e App Meteo 2.</p>
   </footer>
 
-  <!-- MOTORE DI ANIMAZIONE FRAME-BY-FRAME SU CANVAS -->
+  <!-- SCRIPT: OROLOGIO LIVE + SFONDO HERO + ANIMAZIONE PARETE & TELECAMERA ALLO SCROLL -->
   <script>
-    const canvas = document.getElementById('sequence-canvas');
-    const ctx = canvas.getContext('2d');
-    const stage = document.getElementById('scrolly-stage');
-
-    const TOTAL_FRAMES = 120;
-    let currentFrame = 0;
-    let targetFrame = 0;
-
-    // =========================================================================
-    // OPZIONE A (ATTIVA): Render 3D vettoriale ad alta definizione (zero file esterni)
-    // OPZIONE B: Se vuoi usare le TUE immagini reali (es. frames/frame_001.webp ...),
-    // imposta USE_CUSTOM_IMAGES = true e carica la cartella "frames/" su GitHub!
-    // =========================================================================
-    const USE_CUSTOM_IMAGES = false;
-    const customImages = [];
-
-    if (USE_CUSTOM_IMAGES) {
-      for (let i = 1; i <= TOTAL_FRAMES; i++) {
-        const img = new Image();
-        const num = String(i).padStart(3, '0');
-        img.src = `./frames/frame_${num}.webp`;
-        customImages.push(img);
-      }
+    // 1. Orologio live nell'Hero e nell'anteprima smartphone
+    function updateClocks() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('it-IT', { hour12: false });
+      const heroClock = document.getElementById('hero-clock');
+      const phoneTime = document.getElementById('phone-time');
+      if (heroClock) heroClock.textContent = timeStr;
+      if (phoneTime) phoneTime.textContent = timeStr;
     }
+    setInterval(updateClocks, 1000);
+    updateClocks();
 
-    function resizeCanvas() {
+    // 2. Canvas sfondo Hero (nuvole in movimento / radar / simulazione webcam)
+    const heroCanvas = document.getElementById('hero-canvas');
+    const hCtx = heroCanvas.getContext('2d');
+    const clouds = Array.from({ length: 14 }, (_, i) => ({
+      x: (i * 190) % 1600,
+      y: 70 + (i * 67) % 460,
+      rx: 90 + (i % 4) * 45,
+      ry: 28 + (i % 3) * 14,
+      speed: 0.25 + (i % 5) * 0.08,
+      alpha: 0.05 + (i % 4) * 0.025
+    }));
+
+    function resizeHeroCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      renderFrame(Math.round(currentFrame));
+      heroCanvas.width = window.innerWidth * dpr;
+      heroCanvas.height = window.innerHeight * dpr;
+      hCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+    window.addEventListener('resize', resizeHeroCanvas);
+    resizeHeroCanvas();
 
-    window.addEventListener('resize', resizeCanvas);
+    function drawHeroBg() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      hCtx.clearRect(0, 0, w, h);
 
-    // Funzione di utilità per interpolazioni morbide
-    function clamp(val, min, max) {
-      return Math.max(min, Math.min(max, val));
+      // Bagliore radiale superiore
+      const grad = hCtx.createRadialGradient(w * 0.5, h * 0.25, 20, w * 0.5, h * 0.35, w * 0.7);
+      grad.addColorStop(0, 'rgba(56, 189, 248, 0.18)');
+      grad.addColorStop(0.55, 'rgba(14, 165, 233, 0.05)');
+      grad.addColorStop(1, 'rgba(6, 9, 17, 0)');
+      hCtx.fillStyle = grad;
+      hCtx.fillRect(0, 0, w, h);
+
+      // Nuvole in lento movimento timelapse
+      clouds.forEach((c) => {
+        c.x += c.speed;
+        if (c.x - c.rx > w) c.x = -c.rx - 40;
+        hCtx.fillStyle = `rgba(186, 230, 253, ${c.alpha})`;
+        hCtx.beginPath();
+        hCtx.ellipse(c.x, c.y, c.rx, c.ry, 0, 0, Math.PI * 2);
+        hCtx.fill();
+      });
+
+      requestAnimationFrame(drawHeroBg);
     }
-    function smoothstep(edge0, edge1, x) {
-      const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
+    drawHeroBg();
+
+    // 3. Scena a scorrimento: Parete vuota -> Comparsa telecamera 4K
+    const wallSection = document.getElementById('montaggio-scroll');
+    const wallCanvas = document.getElementById('wall-cam-canvas');
+    const wCtx = wallCanvas.getContext('2d');
+
+    let wallProgress = 0;
+    let smoothWallProgress = 0;
+
+    function resizeWallCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      wallCanvas.width = window.innerWidth * dpr;
+      wallCanvas.height = window.innerHeight * dpr;
+      wCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resizeWallCanvas);
+    resizeWallCanvas();
+
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
+    }
+    function smoothstep(e0, e1, x) {
+      const t = clamp((x - e0) / (e1 - e0), 0, 1);
       return t * t * (3 - 2 * t);
     }
 
-    // Disegna il singolo fotogramma (0 -> 119)
-    function renderFrame(frameIndex) {
+    function renderWallScene(p) {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      ctx.clearRect(0, 0, w, h);
+      wCtx.clearRect(0, 0, w, h);
 
-      // Se l'utente ha attivato immagini reali custom
-      if (USE_CUSTOM_IMAGES && customImages[frameIndex] && customImages[frameIndex].complete) {
-        const img = customImages[frameIndex];
-        const scale = Math.min(w / img.width, h / img.height) * 0.88;
-        const iw = img.width * scale;
-        const ih = img.height * scale;
-        ctx.drawImage(img, (w - iw) / 2, (h - ih) / 2, iw, ih);
-        return;
+      // Parete architettonica pulita
+      const wallGrad = wCtx.createLinearGradient(0, 0, 0, h);
+      wallGrad.addColorStop(0, '#0b101b');
+      wallGrad.addColorStop(0.75, '#111827');
+      wallGrad.addColorStop(0.75, '#090d16');
+      wallGrad.addColorStop(1, '#05070d');
+      wCtx.fillStyle = wallGrad;
+      wCtx.fillRect(0, 0, w, h);
+
+      // Linea battiscopa / pavimento
+      const floorY = h * 0.75;
+      wCtx.strokeStyle = 'rgba(148, 163, 184, 0.16)';
+      wCtx.lineWidth = 2;
+      wCtx.beginPath();
+      wCtx.moveTo(0, floorY);
+      wCtx.lineTo(w, floorY);
+      wCtx.stroke();
+
+      // Fasi di comparsa allo scroll:
+      // 0.00 -> 0.15: Parete vuota
+      // 0.15 -> 0.45: Compare braccio forte fissa a muro + piastra
+      // 0.45 -> 0.75: Compare corpo telecamera 4K + lente + LED
+      // 0.75 -> 1.00: Attivazione stream Live 4K con riquadro dati
+
+      const bracketT = smoothstep(0.14, 0.44, p);
+      const camT = smoothstep(0.42, 0.74, p);
+      const liveT = smoothstep(0.72, 0.95, p);
+
+      const cx = w * 0.5;
+      const cy = h * 0.46;
+      const s = Math.min(w / 720, h / 640, 1.25);
+
+      wCtx.save();
+      wCtx.translate(cx, cy);
+      wCtx.scale(s, s);
+
+      // Traccia leggera dove verrà montata la staffa (prima che appaia)
+      if (p < 0.35) {
+        wCtx.save();
+        wCtx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+        wCtx.setLineDash([6, 6]);
+        wCtx.lineWidth = 1.5;
+        wCtx.strokeRect(-130, -45, 70, 90);
+        wCtx.restore();
       }
 
-      const t = frameIndex / (TOTAL_FRAMES - 1); // Progresso normalizzato 0.0 -> 1.0
+      // A. BRACCIO FORTE FISSA A MURO
+      if (bracketT > 0.01) {
+        wCtx.save();
+        const slideX = (1 - bracketT) * -70;
+        wCtx.globalAlpha = bracketT;
+        wCtx.translate(slideX, 0);
 
-      // Fasi del movimento del furgone:
-      // 1) 0.00 -> 0.35: Rotazione dal frontale al profilo 3/4 laterale
-      // 2) 0.35 -> 0.55: Rotazione verso il retro + apertura portelloni posteriori
-      // 3) 0.55 -> 0.78: Portelloni aperti con luce interna e pacchi visibili
-      // 4) 0.78 -> 1.00: Chiusura portelloni e partenza veloce verso l'orizzonte
+        // Piastra a muro con 4 viti/tasselli
+        wCtx.fillStyle = '#334155';
+        wCtx.beginPath();
+        wCtx.roundRect(-132, -46, 26, 92, 5);
+        wCtx.fill();
 
-      const rotToSide = smoothstep(0.0, 0.32, t);
-      const rotToRear = smoothstep(0.32, 0.54, t);
-      const doorOpen = smoothstep(0.48, 0.62, t) * (1 - smoothstep(0.76, 0.86, t));
-      const driveAway = smoothstep(0.84, 1.0, t);
+        wCtx.fillStyle = '#94a3b8';
+        [[-123, -34], [-123, 34], [-115, -34], [-115, 34]].forEach(([bx, by]) => {
+          wCtx.beginPath();
+          wCtx.arc(bx, by, 2.5, 0, Math.PI * 2);
+          wCtx.fill();
+        });
 
-      const centerX = w * 0.5;
-      const baseCenterY = h * 0.56 - driveAway * (h * 0.14);
-      const scaleBase = Math.min(w, h) / 760 * (1 - driveAway * 0.62);
+        // Braccio metallico rinforzato
+        wCtx.fillStyle = '#475569';
+        wCtx.beginPath();
+        wCtx.roundRect(-108, -14, 96, 28, 6);
+        wCtx.fill();
 
-      ctx.save();
-      ctx.translate(centerX, baseCenterY);
-      ctx.scale(scaleBase, scaleBase);
+        // Saetta di rinforzo inferiore (braccio forte)
+        wCtx.strokeStyle = '#64748b';
+        wCtx.lineWidth = 7;
+        wCtx.beginPath();
+        wCtx.moveTo(-108, 30);
+        wCtx.lineTo(-32, 10);
+        wCtx.stroke();
 
-      // Griglia prospettica pavimento studio
-      ctx.save();
-      ctx.strokeStyle = `rgba(56, 189, 248, ${0.14 * (1 - driveAway * 0.7)})`;
-      ctx.lineWidth = 1;
-      for (let gx = -520; gx <= 520; gx += 65) {
-        ctx.beginPath();
-        ctx.moveTo(gx * 0.55, 65);
-        ctx.lineTo(gx * 1.45, 220);
-        ctx.stroke();
-      }
-      for (let gy = 85; gy <= 210; gy += 30) {
-        ctx.beginPath();
-        ctx.moveTo(-480, gy);
-        ctx.lineTo(480, gy);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      // Ombra morbida sotto il furgone
-      const shadowGrad = ctx.createRadialGradient(0, 118, 20, 0, 118, 240);
-      shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
-      shadowGrad.addColorStop(0.6, 'rgba(0, 0, 0, 0.45)');
-      shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = shadowGrad;
-      ctx.beginPath();
-      ctx.ellipse(0, 118, 235 - rotToRear * 45, 34, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Calcolo dimensioni dinamiche in base all'angolo di rotazione
-      const sideFactor = Math.sin(rotToSide * Math.PI * 0.5) * (1 - rotToRear * 0.65);
-      const rearFactor = rotToRear;
-
-      const bodyWidth = 220 + sideFactor * 165 - rearFactor * 40;
-      const bodyHeight = 185;
-      const leftX = -bodyWidth / 2;
-      const topY = -85;
-
-      // Sospensione leggera (micro-molleggio)
-      const bounce = Math.sin(t * Math.PI * 10) * (1.2 + driveAway * 3);
-      ctx.translate(0, bounce);
-
-      // --- 1. FIANCATA LATERALE (visibile durante rotazione 3/4) ---
-      if (sideFactor > 0.02) {
-        ctx.save();
-        const sideGrad = ctx.createLinearGradient(leftX, topY, leftX + bodyWidth, topY + bodyHeight);
-        sideGrad.addColorStop(0, '#e4e4e7');
-        sideGrad.addColorStop(0.5, '#f4f4f5');
-        sideGrad.addColorStop(1, '#a1a1aa');
-        ctx.fillStyle = sideGrad;
-
-        ctx.beginPath();
-        ctx.roundRect(leftX, topY, bodyWidth, bodyHeight, [26, 22, 12, 12]);
-        ctx.fill();
-
-        // Fascia grafica azzurra aziendale sulla fiancata
-        ctx.fillStyle = '#0284c7';
-        ctx.fillRect(leftX + 18, topY + 95, bodyWidth - 36, 14);
-
-        // Finestrino cabina laterale
-        if (rearFactor < 0.7) {
-          ctx.fillStyle = '#09090b';
-          ctx.beginPath();
-          ctx.roundRect(leftX + 20, topY + 22, 75 * (1 - rearFactor), 54, 10);
-          ctx.fill();
-        }
-        ctx.restore();
+        wCtx.restore();
       }
 
-      // --- 2. VISTA FRONTALE (Frame 0 -> 35) ---
-      if (rearFactor < 0.45) {
-        const frontAlpha = 1 - smoothstep(0.18, 0.42, t);
-        const frontW = 210 * (1 - sideFactor * 0.35);
-        const fx = -frontW / 2 - sideFactor * 75;
+      // B. TELECAMERA QUALITÀ 4K
+      if (camT > 0.01) {
+        wCtx.save();
+        const dropY = (1 - camT) * -45;
+        wCtx.globalAlpha = camT;
+        wCtx.translate(0, dropY);
 
-        ctx.save();
-        ctx.globalAlpha = frontAlpha;
+        // Snodo girevole
+        wCtx.fillStyle = '#1e293b';
+        wCtx.beginPath();
+        wCtx.arc(-12, 0, 14, 0, Math.PI * 2);
+        wCtx.fill();
 
-        // Scocca frontale
-        const frontGrad = ctx.createLinearGradient(fx, topY, fx, topY + bodyHeight);
-        frontGrad.addColorStop(0, '#ffffff');
-        frontGrad.addColorStop(0.65, '#e4e4e7');
-        frontGrad.addColorStop(1, '#71717a');
-        ctx.fillStyle = frontGrad;
-        ctx.beginPath();
-        ctx.roundRect(fx, topY, frontW, bodyHeight, [32, 32, 14, 14]);
-        ctx.fill();
+        // Corpo principale telecamera 4K
+        const bodyGrad = wCtx.createLinearGradient(-15, -36, 115, 36);
+        bodyGrad.addColorStop(0, '#f8fafc');
+        bodyGrad.addColorStop(0.65, '#cbd5e1');
+        bodyGrad.addColorStop(1, '#64748b');
+        wCtx.fillStyle = bodyGrad;
+        wCtx.beginPath();
+        wCtx.roundRect(-15, -34, 125, 68, 12);
+        wCtx.fill();
 
-        // Parabrezza panoramico scuro con riflesso
-        ctx.fillStyle = '#09090b';
-        ctx.beginPath();
-        ctx.roundRect(fx + 18, topY + 22, frontW - 36, 66, 14);
-        ctx.fill();
+        // Cappottino parasole superiore
+        wCtx.fillStyle = '#0f172a';
+        wCtx.beginPath();
+        wCtx.roundRect(-10, -40, 136, 10, 4);
+        wCtx.fill();
 
-        const glassGrad = ctx.createLinearGradient(fx + 18, topY + 22, fx + frontW - 18, topY + 88);
-        glassGrad.addColorStop(0, 'rgba(56, 189, 248, 0.25)');
-        glassGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.06)');
-        glassGrad.addColorStop(1, 'rgba(56, 189, 248, 0.02)');
-        ctx.fillStyle = glassGrad;
-        ctx.fill();
+        // Badge 4K sul fianco
+        wCtx.fillStyle = '#0284c7';
+        wCtx.beginPath();
+        wCtx.roundRect(14, 10, 34, 16, 4);
+        wCtx.fill();
+        wCtx.fillStyle = '#ffffff';
+        wCtx.font = 'bold 10px "JetBrains Mono", monospace';
+        wCtx.fillText('4K', 23, 21);
 
-        // Griglia frontale e logo
-        ctx.fillStyle = '#18181b';
-        ctx.beginPath();
-        ctx.roundRect(fx + 32, topY + 106, frontW - 64, 34, 8);
-        ctx.fill();
+        // Obiettivo frontale
+        wCtx.fillStyle = '#090d16';
+        wCtx.beginPath();
+        wCtx.roundRect(108, -24, 22, 48, 5);
+        wCtx.fill();
 
-        ctx.fillStyle = '#38bdf8';
-        ctx.beginPath();
-        ctx.arc(fx + frontW / 2, topY + 123, 7, 0, Math.PI * 2);
-        ctx.fill();
+        // Lente ottica con riflesso
+        wCtx.fillStyle = '#0284c7';
+        wCtx.beginPath();
+        wCtx.arc(130, 0, 14, 0, Math.PI * 2);
+        wCtx.fill();
 
-        // Fari LED anteriori luminosi
-        ctx.fillStyle = '#e0f2fe';
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 18;
-        ctx.beginPath();
-        ctx.roundRect(fx + 14, topY + 112, 24, 12, 5);
-        ctx.roundRect(fx + frontW - 38, topY + 112, 24, 12, 5);
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        wCtx.fillStyle = '#38bdf8';
+        wCtx.beginPath();
+        wCtx.arc(133, -3, 5, 0, Math.PI * 2);
+        wCtx.fill();
 
-        // Paraurti inferiore
-        ctx.fillStyle = '#27272a';
-        ctx.beginPath();
-        ctx.roundRect(fx + 8, topY + 150, frontW - 16, 32, 10);
-        ctx.fill();
+        // LED stato attivo
+        wCtx.fillStyle = liveT > 0.2 ? '#22c55e' : '#38bdf8';
+        wCtx.beginPath();
+        wCtx.arc(72, -16, 4, 0, Math.PI * 2);
+        wCtx.fill();
 
-        ctx.restore();
+        wCtx.restore();
       }
 
-      // --- 3. VISTA POSTERIORE + INTERNO & PORTELLONI (Frame 36 -> 120) ---
-      if (rearFactor > 0.05) {
-        const rearW = 215;
-        const rx = -rearW / 2 + (1 - rearFactor) * 70;
+      // C. CONO VISIVO E FINESTRA STREAM LIVE 4K
+      if (liveT > 0.02) {
+        wCtx.save();
+        wCtx.globalAlpha = liveT;
 
-        ctx.save();
-        ctx.globalAlpha = smoothstep(0.32, 0.48, t);
+        // Cono ottico verso destra
+        const coneGrad = wCtx.createLinearGradient(142, 0, 340, 0);
+        coneGrad.addColorStop(0, 'rgba(56, 189, 248, 0.22)');
+        coneGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        wCtx.fillStyle = coneGrad;
+        wCtx.beginPath();
+        wCtx.moveTo(142, -12);
+        wCtx.lineTo(340, -110);
+        wCtx.lineTo(340, 110);
+        wCtx.lineTo(142, 12);
+        wCtx.closePath();
+        wCtx.fill();
 
-        // Cornice esterna posteriore
-        ctx.fillStyle = '#d4d4d8';
-        ctx.beginPath();
-        ctx.roundRect(rx, topY, rearW, bodyHeight, [18, 18, 12, 12]);
-        ctx.fill();
+        // Riquadro preview 4K live
+        wCtx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+        wCtx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+        wCtx.lineWidth = 1.5;
+        wCtx.beginPath();
+        wCtx.roundRect(175, -72, 178, 110, 10);
+        wCtx.fill();
+        wCtx.stroke();
 
-        // Vano interno illuminato (visibile quando i portelloni si aprono)
-        const innerX = rx + 14;
-        const innerY = topY + 14;
-        const innerW = rearW - 28;
-        const innerH = bodyHeight - 42;
+        wCtx.fillStyle = '#38bdf8';
+        wCtx.font = 'bold 10px "JetBrains Mono", monospace';
+        wCtx.fillText('● LIVE 4K • METEO2', 187, -53);
 
-        ctx.fillStyle = '#09090b';
-        ctx.fillRect(innerX, innerY, innerW, innerH);
+        wCtx.fillStyle = '#f8fafc';
+        wCtx.font = '600 11px Inter, sans-serif';
+        wCtx.fillText('Montagna / Cantiere', 187, -28);
 
-        // Luce LED interna calda/azzurra
-        const cargoLight = ctx.createRadialGradient(
-          innerX + innerW / 2, innerY + 15, 10,
-          innerX + innerW / 2, innerY + innerH / 2, innerW * 0.85
-        );
-        cargoLight.addColorStop(0, `rgba(56, 189, 248, ${0.45 * doorOpen})`);
-        cargoLight.addColorStop(1, 'rgba(9, 9, 11, 0.95)');
-        ctx.fillStyle = cargoLight;
-        ctx.fillRect(innerX, innerY, innerW, innerH);
+        wCtx.fillStyle = '#94a3b8';
+        wCtx.font = '10px "JetBrains Mono", monospace';
+        wCtx.fillText('Temp: +12.5°C  Vento: 15km/h', 187, -8);
+        wCtx.fillText('Stream: 3840x2160 • 4G/5G', 187, 14);
 
-        // Scaffali e pacchi organizzati dentro il vano
-        if (doorOpen > 0.05) {
-          ctx.save();
-          ctx.globalAlpha = doorOpen;
-
-          // Ripiano centrale
-          ctx.fillStyle = '#27272a';
-          ctx.fillRect(innerX + 6, innerY + innerH * 0.52, innerW - 12, 5);
-
-          // Pacchi ripiano superiore
-          const drawBox = (bx, by, bw, bh, color) => {
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.roundRect(bx, by, bw, bh, 4);
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(bx, by, bw, bh);
-            // Nastro adesivo
-            ctx.fillStyle = 'rgba(255,255,255,0.28)';
-            ctx.fillRect(bx + bw * 0.42, by, bw * 0.16, bh);
-          };
-
-          drawBox(innerX + 14, innerY + 24, 48, 44, '#d97706');
-          drawBox(innerX + 68, innerY + 32, 42, 36, '#b45309');
-          drawBox(innerX + 116, innerY + 18, 56, 50, '#0284c7');
-
-          // Pallet e pacchi inferiori
-          drawBox(innerX + 16, innerY + innerH * 0.52 + 12, 72, 48, '#92400e');
-          drawBox(innerX + 94, innerY + innerH * 0.52 + 20, 76, 40, '#d97706');
-
-          ctx.restore();
-        }
-
-        // Portelloni posteriori sinistro e destro che ruotano verso l'esterno
-        const halfDoorW = innerW / 2;
-        const doorPerspectiveW = halfDoorW * Math.cos(doorOpen * Math.PI * 0.46);
-        const doorSwingOut = Math.sin(doorOpen * Math.PI * 0.46) * 26;
-
-        // Portellone Sinistro
-        ctx.fillStyle = '#f4f4f5';
-        ctx.beginPath();
-        ctx.roundRect(innerX - doorSwingOut, innerY, Math.max(8, doorPerspectiveW), innerH, 4);
-        ctx.fill();
-        ctx.strokeStyle = '#71717a';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // Portellone Destro
-        ctx.fillStyle = '#e4e4e7';
-        ctx.beginPath();
-        ctx.roundRect(innerX + innerW - Math.max(8, doorPerspectiveW) + doorSwingOut, innerY, Math.max(8, doorPerspectiveW), innerH, 4);
-        ctx.fill();
-        ctx.stroke();
-
-        // Fanali posteriori rossi LED (accesi in frenata/partenza)
-        ctx.fillStyle = '#ef4444';
-        ctx.shadowColor = '#ef4444';
-        ctx.shadowBlur = 16 + driveAway * 14;
-        ctx.beginPath();
-        ctx.roundRect(rx + 4, topY + 92, 8, 42, 3);
-        ctx.roundRect(rx + rearW - 12, topY + 92, 8, 42, 3);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Paraurti posteriore e targa
-        ctx.fillStyle = '#18181b';
-        ctx.beginPath();
-        ctx.roundRect(rx + 6, topY + bodyHeight - 24, rearW - 12, 24, 8);
-        ctx.fill();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.roundRect(rx + rearW / 2 - 34, topY + bodyHeight - 19, 68, 14, 3);
-        ctx.fill();
-
-        ctx.restore();
+        wCtx.restore();
       }
 
-      // --- 4. RUOTE ---
-      const drawWheel = (wx, wy, radiusX, radiusY) => {
-        ctx.save();
-        ctx.fillStyle = '#09090b';
-        ctx.beginPath();
-        ctx.ellipse(wx, wy, radiusX, radiusY, 0, 0, Math.PI * 2);
-        ctx.fill();
+      wCtx.restore();
+    }
 
-        ctx.strokeStyle = '#3f3f46';
-        ctx.lineWidth = 3;
-        ctx.stroke();
+    const beat1 = document.getElementById('wall-beat-1');
+    const beat2 = document.getElementById('wall-beat-2');
+    const beat3 = document.getElementById('wall-beat-3');
+    const wallStepLabel = document.getElementById('wall-step-label');
+    const wallProgressBar = document.getElementById('wall-progress-bar');
+    const wallPercent = document.getElementById('wall-percent');
 
-        // Cerchione in lega
-        ctx.fillStyle = '#a1a1aa';
-        ctx.beginPath();
-        ctx.ellipse(wx, wy, radiusX * 0.55, radiusY * 0.55, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+    function updateWallUI(p) {
+      const pct = Math.round(p * 100);
+      wallPercent.textContent = `${pct}%`;
+      wallProgressBar.style.width = `${pct}%`;
+
+      if (p < 0.16) {
+        wallStepLabel.textContent = 'FASE: PARETE VUOTA';
+      } else if (p < 0.45) {
+        wallStepLabel.textContent = 'FASE: BRACCIO FORTE FISSA A MURO';
+      } else if (p < 0.74) {
+        wallStepLabel.textContent = 'FASE: TELECAMERA QUALITÀ 4K';
+      } else {
+        wallStepLabel.textContent = 'FASE: STREAM LIVE & APP METEO 2';
+      }
+
+      const toggleBeat = (el, active) => {
+        el.style.opacity = active ? '1' : '0';
+        el.style.transform = active ? 'translateY(0px)' : 'translateY(20px)';
       };
 
-      if (sideFactor > 0.15) {
-        drawWheel(leftX + 55, topY + bodyHeight - 2, 26, 28);
-        drawWheel(leftX + bodyWidth - 55, topY + bodyHeight - 2, 26, 28);
-      } else {
-        drawWheel(-82, topY + bodyHeight - 2, 16, 26);
-        drawWheel(82, topY + bodyHeight - 2, 16, 26);
-      }
-
-      ctx.restore();
+      toggleBeat(beat1, p >= 0.16 && p < 0.45);
+      toggleBeat(beat2, p >= 0.45 && p < 0.74);
+      toggleBeat(beat3, p >= 0.74);
     }
 
-    // Aggiornamento interfaccia e testi flottanti in base allo scroll
-    const beats = [
-      { el: document.getElementById('beat-0'), start: 0.00, end: 0.23 },
-      { el: document.getElementById('beat-1'), start: 0.26, end: 0.49 },
-      { el: document.getElementById('beat-2'), start: 0.52, end: 0.77 },
-      { el: document.getElementById('beat-3'), start: 0.80, end: 1.00 },
-    ];
-
-    const frameCounter = document.getElementById('frame-counter');
-    const phaseLabel = document.getElementById('phase-label');
-    const percentCounter = document.getElementById('percent-counter');
-    const progressBar = document.getElementById('scroll-progress-bar');
-
-    function updateUI(progress) {
-      const frameNum = Math.min(TOTAL_FRAMES, Math.max(1, Math.round(progress * (TOTAL_FRAMES - 1)) + 1));
-      const pct = Math.round(progress * 100);
-
-      frameCounter.textContent = `FRAME ${String(frameNum).padStart(3, '0')} / ${TOTAL_FRAMES}`;
-      percentCounter.textContent = `${pct}%`;
-      progressBar.style.width = `${pct}%`;
-
-      if (progress < 0.25) {
-        phaseLabel.textContent = '— VISTA FRONTALE';
-      } else if (progress < 0.50) {
-        phaseLabel.textContent = '— ROTAZIONE 3/4 LATERALE';
-      } else if (progress < 0.78) {
-        phaseLabel.textContent = '— APERTURA PORTELLONI & CARICO';
-      } else {
-        phaseLabel.textContent = '— CHIUSURA E PARTENZA';
-      }
-
-      beats.forEach((beat) => {
-        const isVisible = progress >= beat.start && progress <= beat.end;
-        if (isVisible) {
-          beat.el.style.opacity = '1';
-          beat.el.style.transform = 'translateY(0px)';
-        } else {
-          beat.el.style.opacity = '0';
-          beat.el.style.transform = 'translateY(20px)';
-        }
-      });
-    }
-
-    // Calcolo targetFrame durante lo scroll
     function onScroll() {
-      const rect = stage.getBoundingClientRect();
-      const scrollableDistance = rect.height - window.innerHeight;
-      if (scrollableDistance <= 0) return;
-
-      const scrolled = -rect.top;
-      const progress = clamp(scrolled / scrollableDistance, 0, 1);
-      targetFrame = progress * (TOTAL_FRAMES - 1);
-      updateUI(progress);
+      const rect = wallSection.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+      wallProgress = clamp(-rect.top / scrollable, 0, 1);
+      updateWallUI(wallProgress);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Loop fluido a 60fps con smorzamento (lerp)
-    function animate() {
-      currentFrame += (targetFrame - currentFrame) * 0.14;
-      renderFrame(Math.round(currentFrame));
-      requestAnimationFrame(animate);
+    function wallLoop() {
+      smoothWallProgress += (wallProgress - smoothWallProgress) * 0.14;
+      renderWallScene(smoothWallProgress);
+      requestAnimationFrame(wallLoop);
+    }
+    onScroll();
+    wallLoop();
+
+    // 4. Calcolatore preventivo interattivo & selezione pacchetto
+    function calcEstimate() {
+      const cams = parseInt(document.getElementById('calc-cams').value, 10);
+      const power = parseInt(document.getElementById('calc-power').value, 10);
+      const net = parseInt(document.getElementById('calc-net').value, 10);
+      const meteo = parseInt(document.getElementById('calc-meteo').value, 10);
+
+      const basePerCam = 890;
+      const total = cams * basePerCam + power + net + meteo;
+
+      document.getElementById('estimate-output').textContent = `€ ${total.toLocaleString('it-IT')}`;
+      document.getElementById('estimate-note').textContent =
+        `${cams} ${cams === 1 ? 'camera 4K' : 'camere 4K'} • ${power > 0 ? 'Pannello solare' : 'Rete elettrica'} • ${net === 0 ? 'Wi-Fi/LAN' : net === 350 ? '4G/5G' : 'Ponte radio'}`;
+    }
+    calcEstimate();
+
+    function selectPackage(pkgName) {
+      const selectEl = document.getElementById('form-package');
+      if (selectEl) {
+        for (const opt of selectEl.options) {
+          if (opt.value === pkgName || opt.text === pkgName) {
+            selectEl.value = opt.value;
+            break;
+          }
+        }
+      }
+      document.getElementById('galleria-contatti').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Invio form demo
-    document.getElementById('quote-form').addEventListener('submit', (e) => {
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      document.getElementById('form-feedback').classList.remove('hidden');
+      document.getElementById('contact-feedback').classList.remove('hidden');
       e.target.reset();
     });
-
-    // Avvio iniziale
-    resizeCanvas();
-    onScroll();
-    animate();
   </script>
 </body>
 </html>
